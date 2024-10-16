@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurostates"
+version = "0.1.0"
+authors = [{ name = "Gabriel Della Bella", email = "dellabellagabriel@gmail.com" }, { name = "Natalia Rodriguez", email = "natirodriguez114@gmail.com" }]
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+description = "Neurostates is a tool for analyzing patterns of functional connectivity in EEG and fMRI."
+keywords = [
+    "brain",
+    "functional",
+    "connectivity",
+    "eeg",
+    "fmri"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.0,<2.0",
+    "scipy",
+]
+
+[tool.black]
+line-length = 79
