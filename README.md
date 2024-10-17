@@ -8,7 +8,7 @@ El objetivo de esta librería es estandarizar el análisis de los estados de con
 - Clustering de matrices de conectividad funcional (ej. k-means, DBSCAN).
 - Determinación del k optimo para k-means (ej, elbow method).
 - Ordenamiento de estados cerebrales según entriopía u otras medidas (ej. similaridad estructural).
-- Construcción de la distribución de probabilidad de estados cerebrales para cada sujeto
+- Construcción de la distribución de probabilidad de estados cerebrales para cada sujeto.
 - Visualización de datos y resultados como las matrices de conectividad dinámica, distribución de la probabilidad, matrices de transición.
 - Test de significancia estadística sobre los resultados (ej. t-test, modelo de efectos mixtos)
 
