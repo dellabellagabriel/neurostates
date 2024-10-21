@@ -2,12 +2,18 @@
 # Copyright (c) 2024, Della Bella, Gabriel; Rodriguez, Natalia
 # All rights reserved.
 
-from neurostates.core.neurodata import NeuroData
+from neurostates.core.neurodata import NeuroEEG, NeuroFMRI
 
 
 def create_data_from_matrix(matrix, modality, sampling_rate=None, tr=None):
-    return NeuroData.from_matrix_data(
-        data=matrix, modality=modality, sampling_rate=sampling_rate, tr=tr
+    if modality == "eeg":
+        return NeuroEEG.create_from_matrix(matrix, sampling_rate)
+
+    if modality == "fmri":
+        return NeuroFMRI.create_from_matrix(matrix, tr)
+
+    raise ValueError(
+        f"Unsupported modality {modality}. Options are 'eeg', 'fmri'."
     )
 
 
