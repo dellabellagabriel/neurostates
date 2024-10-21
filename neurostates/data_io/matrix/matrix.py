@@ -15,7 +15,3 @@ def create_data_from_matrix(matrix, modality, sampling_rate=None, tr=None):
     raise ValueError(
         f"Unsupported modality {modality}. Options are 'eeg', 'fmri'."
     )
-
-
-def create_data_from_bids(bids_path):
-    raise NotImplementedError()
