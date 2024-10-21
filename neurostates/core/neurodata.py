@@ -59,6 +59,12 @@ class NeuroImage(ABC):
     @abstractmethod
     def create_from_bids(cls, path: os.PathLike) -> "NeuroImage": ...
 
+    @abstractmethod
+    def time_to_samples(self, time: float) -> float: ...
+
+    @abstractmethod
+    def samples_to_time(self, samples: float) -> float: ...
+
 
 class NeuroEEG(NeuroImage):
     def __init__(self, matrix: NDArray, sampling_rate):
@@ -75,6 +81,12 @@ class NeuroEEG(NeuroImage):
     def create_from_bids(cls, path):
         raise NotImplementedError()
 
+    def time_to_samples(self, time):
+        return time * self.sampling_rate
+
+    def samples_to_time(self, samples):
+        return samples / self.sampling_rate
+
 
 class NeuroFMRI(NeuroImage):
     def __init__(self, matrix, tr):
@@ -90,3 +102,9 @@ class NeuroFMRI(NeuroImage):
     @classmethod
     def create_from_bids(cls, path):
         raise NotImplementedError()
+
+    def time_to_samples(self, time):
+        return time / self.tr
+
+    def samples_to_time(self, samples):
+        return samples * self.tr
