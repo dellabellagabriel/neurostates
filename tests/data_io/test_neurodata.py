@@ -2,7 +2,7 @@
 # Copyright (c) 2024, Della Bella, Gabriel; Rodriguez, Natalia
 # All rights reserved.
 
-from neurostates.data_io.matrix.matrix import create_data_from_matrix
+from neurostates.data_io.matrix import create_data_from_matrix
 
 import numpy as np
 
