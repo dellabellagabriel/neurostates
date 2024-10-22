@@ -8,6 +8,8 @@ import numpy as np
 
 import pytest
 
+np.random.seed(42)
+
 
 def test_create_fmri_data_from_matrix():
     n_subjects = 20
