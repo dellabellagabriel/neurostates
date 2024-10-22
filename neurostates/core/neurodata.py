@@ -53,20 +53,44 @@ class NeuroImage(ABC):
     @abstractmethod
     def create_from_matrix(
         cls, matrix: NDArray, *args, **kwargs
-    ) -> "NeuroImage": ...
+    ) -> "NeuroImage":
+        """
+        Creates a NeuroImage class from a raw matrix and a sampling_rate
+        or TR parameter
+        """
 
     @classmethod
     @abstractmethod
-    def create_from_bids(cls, path: os.PathLike) -> "NeuroImage": ...
+    def create_from_bids(cls, path: os.PathLike) -> "NeuroImage":
+        """
+        Creates a NeuroImage class from a BIDS path
+        """
 
     @abstractmethod
-    def time_to_samples(self, time: float) -> float: ...
+    def time_to_samples(self, time: float) -> float:
+        """
+        Converts time in seconds to samples
+        """
 
     @abstractmethod
-    def samples_to_time(self, samples: float) -> float: ...
+    def samples_to_time(self, samples: float) -> float:
+        """
+        Converts samples to time in seconds
+        """
 
 
 class NeuroEEG(NeuroImage):
+    """
+    Represents the necessary data for brain state analysis in EEG
+
+    Parameters
+    ----------
+    data: :py:class:`RawMatrix`
+        The raw matrix representing the data
+    sampling_rate: float
+        The sampling rate in Hz
+    """
+
     def __init__(self, matrix: NDArray, sampling_rate):
         self.data = RawMatrix(matrix)
         self.sampling_rate = sampling_rate
@@ -89,6 +113,17 @@ class NeuroEEG(NeuroImage):
 
 
 class NeuroFMRI(NeuroImage):
+    """
+    Represents the necessary data for brain state analysis in fMRI
+
+    Parameters
+    ----------
+    data: :py:class:`RawMatrix`
+        The raw matrix representing the data
+    tr: float
+        The repetition time (TR) in seconds
+    """
+
     def __init__(self, matrix, tr):
         self.data = RawMatrix(matrix)
         self.tr = tr
