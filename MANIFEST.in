@@ -1,0 +1,10 @@
+include LICENSE.txt
+include README.md
+include pyproject.toml
+
+recursive-include neurostates *.py
+
+exclude tox.ini
+exclude requirements_dev.txt
+
+recursive-exclude tests *
