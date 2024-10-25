@@ -8,10 +8,9 @@ import numpy as np
 
 import pytest
 
-np.random.seed(42)
-
 
 def test_create_fmri_data_from_matrix():
+    np.random.seed(42)
     n_subjects = 20
     n_regions = 90
     n_samples = 150

@@ -3,10 +3,9 @@ from neurostates.core.window import SlidingWindow
 
 import numpy as np
 
-np.random.seed(42)
-
 
 def test_sliding_window_no_tapering_function():
+    np.random.seed(42)
     n_subjects = 20
     n_regions = 90
     n_samples = 150
