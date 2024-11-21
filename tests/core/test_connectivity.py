@@ -1,24 +1,23 @@
-from neurostates.core.connectivity import Connectivity
-from neurostates.core.io import create_data_from_matrix
-from neurostates.core.window import SlidingWindow
+from neurostates.core.connectivity import connectivity
+from neurostates.core.window import window
 
 import numpy as np
 
 
-def test_connectivity_using_pearson():
+def test_connectivity_shape():
     np.random.seed(42)
     n_subjects = 20
     n_regions = 90
     n_samples = 150
     matrix = np.random.rand(n_subjects, n_regions, n_samples)
-    neurodata = create_data_from_matrix(matrix=matrix, modality="fmri", tr=2.0)
 
     size = 20
     step = 5
-    sliding_window = SlidingWindow(size, step)
-    sliding_window.apply_to(neurodata)
+    sliding_window = window(matrix, size, step)
 
-    connectivity = Connectivity(method=np.corrcoef)
-    connectivity.apply_to(sliding_window)
+    connectivity_output = connectivity(sliding_window)
 
-    assert connectivity.connectivity_data_.shape == (27, 20, 90, 90)
+    assert connectivity_output.shape == (20, 27, 90, 90)
+
+def test_connectivity_method():
+    pass

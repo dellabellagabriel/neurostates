@@ -6,6 +6,43 @@
 
 import numpy as np
 
+def connectivity(windowed_data, method=None):
+    """
+    Represents the functional connectivity operation.
+    This usually comes from the output of window function.
+
+    Parameters
+    ----------
+    windowed_data: numpy array
+        The output of window function. 
+        The shape should be subjets x regions x window x samples
+
+    method: callable
+        The function that will be used to compute the connectivity between
+        regions. Default is None, which means the method will be the 
+        Pearson correlation (np.corrcoef)
+    """
+    
+    subjects, regions, windows, samples = windowed_data.shape
+    method = np.corrcoef if method is None else method
+    
+    connectivity_data = np.empty(
+        (
+            subjects,
+            windows,
+            regions,
+            regions,
+        )        
+    )
+    
+    for subject in range(subjects):
+        for window in range(windows):
+            connectivity_data[subject, window, :, :] = method(
+                windowed_data[subject, :, window, :]
+            )
+
+    return connectivity_data
+    
 
 class Connectivity:
     """
