@@ -8,8 +8,12 @@ import numpy as np
 
 def window(data_array, length, step, tapering_function=None):
     """ Represents a sliding window operation. 
+        
         Parameters
         ----------
+        data_array: numpy array
+            The neuroimage data.
+            The shape should be subjects x regions x samples 
         length: int
             The size of the window in samples.
         step: int
@@ -17,6 +21,9 @@ def window(data_array, length, step, tapering_function=None):
         tapering_function: callable
             The function that will be used to taper the window.
     """
+    if data_array.ndim != 3:
+        raise ValueError("Argument data_array must be a 3-dimensional array.")
+    
     subjects, regions, samples = data_array.shape
     
     tapering_window = (
@@ -27,16 +34,16 @@ def window(data_array, length, step, tapering_function=None):
     n_windows = int((samples - length) / step) + 1
     windowed_data = np.empty(
         (
-            n_windows,
             subjects,
             regions,
+            n_windows,
             length,
         )
     )
     for i in range(n_windows):
         from_index = i * step
         to_index = from_index + length
-        windowed_data[i] = (
+        windowed_data[:,:,i,:] = (
             tapering_window
             * data_array[:, :, from_index:to_index]
         )

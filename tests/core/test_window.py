@@ -1,3 +1,4 @@
+import pytest
 from neurostates.core.window import window
 from scipy.signal.windows import hamming
 
@@ -13,7 +14,7 @@ def test_window_shape_tapering_none():
     size = 20
     step = 5
     sliding_window = window(data_array, size, step)
-    windows, subjects, regions, samples = sliding_window.shape
+    subjects, regions, windows, samples = sliding_window.shape
 
     n_windows_ref = int((n_samples - size) / step) + 1
     assert windows == n_windows_ref
@@ -31,10 +32,23 @@ def test_window_shape_tapering():
     size = 20
     step = 5
     sliding_window = window(data_array, size, step, hamming)
-    windows, subjects, regions, samples = sliding_window.shape
+    subjects, regions, windows, samples = sliding_window.shape
 
     n_windows_ref = int((n_samples - size) / step) + 1
     assert windows == n_windows_ref
     assert subjects == n_subjects
     assert regions == n_regions
     assert samples == size
+
+def test_window_wrong_data():
+    np.random.seed(42)
+    n_subjects = 20
+    n_regions = 90
+    
+    data_array = np.random.rand(n_subjects, n_regions)
+    
+    size = 20
+    step = 5
+    with pytest.raises(ValueError):
+        sliding_window = window(data_array, size, step)
+    
