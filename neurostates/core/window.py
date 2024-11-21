@@ -6,6 +6,42 @@
 
 import numpy as np
 
+def window(data_array, length, step, tapering_function=None):
+    """ Represents a sliding window operation. 
+        Parameters
+        ----------
+        length: int
+            The size of the window in samples.
+        step: int
+            The step size of the window in samples.
+        tapering_function: callable
+            The function that will be used to taper the window.
+    """
+    subjects, regions, samples = data_array.shape
+    
+    tapering_window = (
+            np.ones(length)
+            if tapering_function is None
+            else tapering_function(length)
+        )
+    n_windows = int((samples - length) / step) + 1
+    windowed_data = np.empty(
+        (
+            n_windows,
+            subjects,
+            regions,
+            length,
+        )
+    )
+    for i in range(n_windows):
+        from_index = i * step
+        to_index = from_index + length
+        windowed_data[i] = (
+            tapering_window
+            * data_array[:, :, from_index:to_index]
+        )
+
+    return windowed_data 
 
 class SlidingWindow:
     """Represents a sliding window operation.
