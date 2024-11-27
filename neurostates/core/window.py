@@ -5,8 +5,9 @@
 """window has functionalities related to sliding window operations."""
 
 import numpy as np
+from .utils import validate_data_array
 
-def window(data_array, length, step, tapering_function=None):
+def window(data_array_raw, length, step, tapering_function=None):
     """ Represents a sliding window operation. 
         
         Parameters
@@ -21,8 +22,10 @@ def window(data_array, length, step, tapering_function=None):
         tapering_function: callable
             The function that will be used to taper the window.
     """
-    if data_array.ndim != 3:
+    if data_array_raw.ndim != 3:
         raise ValueError("Argument data_array must be a 3-dimensional array.")
+    
+    data_array = validate_data_array(data_array_raw)
     
     subjects, regions, samples = data_array.shape
     

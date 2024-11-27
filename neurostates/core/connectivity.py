@@ -5,8 +5,9 @@
 """connectivity has functionalities related to functional connectivity."""
 
 import numpy as np
+from .utils import validate_data_array
 
-def connectivity(windowed_data, method=None):
+def connectivity(windowed_data_raw, method=None):
     """
     Represents the functional connectivity operation.
     This usually comes from the output of window function.
@@ -22,6 +23,8 @@ def connectivity(windowed_data, method=None):
         regions. Default is None, which means the method will be the 
         Pearson correlation (np.corrcoef)
     """
+    
+    windowed_data = validate_data_array(windowed_data_raw)
     
     subjects, regions, windows, samples = windowed_data.shape
     method = np.corrcoef if method is None else method

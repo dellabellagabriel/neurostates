@@ -51,4 +51,29 @@ def test_window_wrong_data():
     step = 5
     with pytest.raises(ValueError):
         sliding_window = window(data_array, size, step)
+
+def test_validate_data_array_string():
+    np.random.seed(42) # ver como cambiar esto
+    n_subjects = 20
+    n_regions = 90
+    n_samples = 150
+    matrix = np.random.rand(n_subjects, n_regions, n_samples).astype(object)
+    matrix[0, 0, 0] = 'a'
+
+    size = 20
+    step = 5
+    with pytest.raises(ValueError):
+        sliding_window = window(matrix, size, step)
+
+def test_validate_data_array_nan():
+    np.random.seed(42)
+    n_subjects = 20
+    n_regions = 90
+    n_samples = 150
+    matrix = np.random.rand(n_subjects, n_regions, n_samples)
+    matrix[0, 0, 0] = np.nan
     
+    size = 20
+    step = 5
+    with pytest.raises(ValueError):
+        sliding_window = window(matrix,size, step)
