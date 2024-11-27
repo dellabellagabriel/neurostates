@@ -1,4 +1,5 @@
 *.egg-info/
 *.pyc
-.coverage
+.coverage*
+.DS_Store
 .python-version
