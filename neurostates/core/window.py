@@ -25,10 +25,8 @@ def window(data_array_raw, length, step, tapering_function=None):
     tapering_function: callable
         The function that will be used to taper the window.
     """
-    if data_array_raw.ndim != 3:
-        raise ValueError("Argument data_array must be a 3-dimensional array.")
 
-    data_array = validate_data_array(data_array_raw)
+    data_array = validate_data_array(data_array_raw, ndim=3)
 
     subjects, regions, samples = data_array.shape
 

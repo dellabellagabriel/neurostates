@@ -25,7 +25,7 @@ def connectivity(windowed_data_raw, method=None):
         regions. Default is None, which means the method will be the
         Pearson correlation (np.corrcoef)
     """
-    windowed_data = validate_data_array(windowed_data_raw)
+    windowed_data = validate_data_array(windowed_data_raw, ndim=4)
 
     subjects, regions, windows, samples = windowed_data.shape
     method = np.corrcoef if method is None else method
