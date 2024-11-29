@@ -1,11 +1,14 @@
-import pytest
 from neurostates.core.window import window
-from scipy.signal.windows import hamming
 
 import numpy as np
 
+import pytest
+
+from scipy.signal.windows import hamming
+
+
 def test_window_shape_tapering_none():
-    np.random.seed(42) # ver como cambiar esto
+    np.random.seed(42)  # ver como cambiar esto
     n_subjects = 20
     n_regions = 90
     n_samples = 150
@@ -22,8 +25,9 @@ def test_window_shape_tapering_none():
     assert regions == n_regions
     assert samples == size
 
+
 def test_window_shape_tapering():
-    np.random.seed(42) # ver como cambiar esto
+    np.random.seed(42)  # ver como cambiar esto
     n_subjects = 20
     n_regions = 90
     n_samples = 150
@@ -40,30 +44,33 @@ def test_window_shape_tapering():
     assert regions == n_regions
     assert samples == size
 
+
 def test_window_wrong_data():
     np.random.seed(42)
     n_subjects = 20
     n_regions = 90
-    
+
     data_array = np.random.rand(n_subjects, n_regions)
-    
+
     size = 20
     step = 5
     with pytest.raises(ValueError):
-        sliding_window = window(data_array, size, step)
+        window(data_array, size, step)
+
 
 def test_validate_data_array_string():
-    np.random.seed(42) # ver como cambiar esto
+    np.random.seed(42)  # ver como cambiar esto
     n_subjects = 20
     n_regions = 90
     n_samples = 150
     matrix = np.random.rand(n_subjects, n_regions, n_samples).astype(object)
-    matrix[0, 0, 0] = 'a'
+    matrix[0, 0, 0] = "a"
 
     size = 20
     step = 5
     with pytest.raises(ValueError):
-        sliding_window = window(matrix, size, step)
+        window(matrix, size, step)
+
 
 def test_validate_data_array_nan():
     np.random.seed(42)
@@ -72,8 +79,8 @@ def test_validate_data_array_nan():
     n_samples = 150
     matrix = np.random.rand(n_subjects, n_regions, n_samples)
     matrix[0, 0, 0] = np.nan
-    
+
     size = 20
     step = 5
     with pytest.raises(ValueError):
-        sliding_window = window(matrix,size, step)
+        window(matrix, size, step)
