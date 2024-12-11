@@ -11,7 +11,9 @@ def validate_data_array(data_array, ndim):
     """Validates that the input is numeric and does not contain NaN."""
     data_array = data_array.astype(np.float32)
     if data_array.ndim != ndim:
-        raise ValueError(f"Argument data_array must be a {ndim}-dimensional array.")
+        raise ValueError(
+            f"Argument data_array must be a {ndim}-dimensional array."
+        )
     if np.any(np.isnan(data_array)):
         raise ValueError("The input data cannot contain NaN.")
 
@@ -19,6 +21,8 @@ def validate_data_array(data_array, ndim):
 
 
 def validate_groups_dict(groups_dict):
+    """Validates that the groups is a dictionary and the elements \
+    of the dictionary are valid data arrays."""
     if not isinstance(groups_dict, dict):
         raise TypeError("groups_dict must be a dictionary")
     for group in groups_dict:

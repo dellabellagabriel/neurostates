@@ -2,33 +2,46 @@
 # Copyright (c) 2024, Della Bella, Gabriel; Rodriguez, Natalia
 # All rights reserved.
 
-"""clustering performs a clustering algortithm over the data processed by
-connectivity"""
+"""clustering performs a clustering algortithm over the data processed by \
+connectivity."""
 
-from .utils import validate_groups_dict
+import numpy as np
 
 from sklearn.cluster import KMeans
 
+from .utils import validate_groups_dict
+
 
 def clustering(groups_dict, n_clusters, **clustering_kwargs):
-    """_summary_
+    """Perform k-means clustering on dynamic connectivity matrices.
 
-    Args:
-        groups_dict (_type_): _description_
-        n_clusters (_type_): _description_
+    This function uses the groups found in `groups_dict` as the groups/conditions 
+    of the experiment and returns an n_clusters x rois x rois matrix.
+
+    Parameters
+    ----------
+        groups_dict (dict[str, ndarray]): A dictionary of conditions.
+        Each condition must have a numpy array with the dynamic connectivity
+        matrices from connectivity().
+
+        n_clusters (int): The number of clusters.
+        **clustering_kwargs: Keyword arguments for clustering.
     """
-    
     validate_groups_dict(groups_dict)
-    
-    # TODO: concatenar todos los grupos
-    # data_concatenated = ....
+
+    data_concatenate = []
     for group in groups_dict:
         subjects, windows, rois, _ = groups_dict[group].shape
-        data = groups_dict[group].reshape(subjects, windows, -1).reshape(subjects*windows, -1)
-        
-    
+        data = (
+            groups_dict[group]
+            .reshape(subjects, windows, -1)
+            .reshape(subjects * windows, -1)
+        )
+        data_concatenate.append(data)
+
+    data_concatenate = np.array(data_concatenate)
+    data_concatenate = data_concatenate.reshape(-1, rois**2)
     kmeans = KMeans(n_clusters=n_clusters, **clustering_kwargs)
-    # kmeans.fit(data_concatenated)
-    
-    return kmeans.cluster_centers_
-    
+    kmeans.fit(data_concatenate)
+
+    return kmeans.cluster_centers_.reshape(-1, rois, rois)

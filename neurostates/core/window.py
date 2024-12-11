@@ -25,7 +25,6 @@ def window(data_array_raw, length, step, tapering_function=None):
     tapering_function: callable
         The function that will be used to taper the window.
     """
-
     data_array = validate_data_array(data_array_raw, ndim=3)
 
     subjects, regions, samples = data_array.shape
