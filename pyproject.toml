@@ -20,6 +20,7 @@ requires-python = ">=3.9"
 dependencies = [
     "numpy>=1.0,<2.0",
     "scipy",
+    "scikit-learn"
 ]
 
 [tool.black]
