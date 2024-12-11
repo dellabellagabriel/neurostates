@@ -24,6 +24,12 @@ def window(data_array_raw, length, step, tapering_function=None):
         The step size of the window in samples.
     tapering_function: callable
         The function that will be used to taper the window.
+
+    Returns
+    -------
+    windowed_data: ndarray
+    An array of size subjects x regions x windows x samples that\
+    holds the data after the sliding window procedure.
     """
     data_array = validate_data_array(data_array_raw, ndim=3)
 

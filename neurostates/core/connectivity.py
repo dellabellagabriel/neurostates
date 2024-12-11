@@ -18,16 +18,22 @@ def connectivity(windowed_data_raw, method=None):
     ----------
     windowed_data: numpy array
         The output of window function.
-        The shape should be subjets x regions x window x samples
+        The shape should be subjets x regions x window x samples.
 
     method: callable
         The function that will be used to compute the connectivity between
         regions. Default is None, which means the method will be the
-        Pearson correlation (np.corrcoef)
+        Pearson correlation (np.corrcoef).
+
+    Returns
+    -------
+    connectivity_data: ndarray
+    An array of size subjects x windows x regions x regions that holds the\
+    connectivity values.
     """
     windowed_data = validate_data_array(windowed_data_raw, ndim=4)
 
-    subjects, regions, windows, samples = windowed_data.shape
+    subjects, regions, windows, _ = windowed_data.shape
     method = np.corrcoef if method is None else method
 
     connectivity_data = np.empty(

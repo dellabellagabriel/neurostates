@@ -15,8 +15,9 @@ from .utils import validate_groups_dict
 def clustering(groups_dict, n_clusters, **clustering_kwargs):
     """Perform k-means clustering on dynamic connectivity matrices.
 
-    This function uses the groups found in `groups_dict` as the groups/conditions 
-    of the experiment and returns an n_clusters x rois x rois matrix.
+    This function uses the groups found in `groups_dict` as the\
+    groups/conditions of the experiment and returns an\
+    n_clusters x rois x rois matrix.
 
     Parameters
     ----------
@@ -26,6 +27,12 @@ def clustering(groups_dict, n_clusters, **clustering_kwargs):
 
         n_clusters (int): The number of clusters.
         **clustering_kwargs: Keyword arguments for clustering.
+
+    Returns
+    -------
+        centroids: ndarray
+        An array of size n_centroids x regions x regions that results from\
+        the clustering algorithm.
     """
     validate_groups_dict(groups_dict)
 
