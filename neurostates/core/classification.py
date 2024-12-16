@@ -12,6 +12,7 @@ from scipy.spatial.distance import cdist
 from .utils import validate_data_array, validate_groups_dict
 
 
+# TODO: agregar criterio para ordenamiento de centroides
 def classification(groups_dict, centroids, metric="euclidean"):
     """Takes the centroids previously calculated with clustering()\
     and a dictionary of groups/conditions containing the dynamic\
@@ -33,6 +34,12 @@ def classification(groups_dict, centroids, metric="euclidean"):
         metric (str): Metric to use as a distance between matrices and\
         centroids. Default: "euclidean"
 
+    Returns
+    -------
+        Tuple(group_labels(ndarray), group_freqs(ndarray)): A tuple that
+        contains two arrays, group_labels which is the label resulting
+        from the classification based on centroids, and group_freqs which
+        calculates the frequency of each label.
     """
     validate_groups_dict(groups_dict)
     centroids = validate_data_array(centroids, 3)
