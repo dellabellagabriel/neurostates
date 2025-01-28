@@ -5,9 +5,29 @@
 """window has functionalities related to sliding window operations."""
 
 import numpy as np
-
+from sklearn.base import BaseEstimator, TransformerMixin
 
 from .utils import validate_data_array
+
+class SecondsWindower(BaseEstimator, TransformerMixin):
+    def __init__(self, length, step, tapering_function, sample_rate):
+        self.length = length
+        self.step = step
+        self.tapering_function = tapering_function
+        self.sample_rate = sample_rate
+
+    def transform(self, X):
+        return window(X, length=int(self.length*self.sample_rate), step=int(self.step*self.sample_rate), tapering_function=self.tapering_function)
+
+
+class SamplesWindower(BaseEstimator, TransformerMixin):
+    def __init__(self, length, step, tapering_function):
+        self.length = length
+        self.step = step
+        self.tapering_function = tapering_function
+
+    def transform(self, X):
+        return window(X, length=self.length, step=self.step, tapering_function=self.tapering_function)
 
 
 def window(data_array_raw, length, step, tapering_function=None):
