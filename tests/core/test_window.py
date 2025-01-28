@@ -1,4 +1,4 @@
-from neurostates.core.window import window
+from neurostates.core.window import window, SamplesWindower, SecondsWindower
 
 import numpy as np
 
@@ -14,16 +14,16 @@ def test_window_shape_tapering_none():
     n_samples = 150
     data_array = np.random.rand(n_subjects, n_regions, n_samples)
 
-    size = 20
+    length = 20
     step = 5
-    sliding_window = window(data_array, size, step)
+    sliding_window = window(data_array, length, step)
     subjects, regions, windows, samples = sliding_window.shape
 
-    n_windows_ref = int((n_samples - size) / step) + 1
+    n_windows_ref = int((n_samples - length) / step) + 1
     assert windows == n_windows_ref
     assert subjects == n_subjects
     assert regions == n_regions
-    assert samples == size
+    assert samples == length
 
 
 def test_window_shape_tapering():
@@ -33,16 +33,16 @@ def test_window_shape_tapering():
     n_samples = 150
     data_array = np.random.rand(n_subjects, n_regions, n_samples)
 
-    size = 20
+    length = 20
     step = 5
-    sliding_window = window(data_array, size, step, hamming)
+    sliding_window = window(data_array, length, step, hamming)
     subjects, regions, windows, samples = sliding_window.shape
 
-    n_windows_ref = int((n_samples - size) / step) + 1
+    n_windows_ref = int((n_samples - length) / step) + 1
     assert windows == n_windows_ref
     assert subjects == n_subjects
     assert regions == n_regions
-    assert samples == size
+    assert samples == length
 
 
 def test_window_wrong_data():
@@ -52,10 +52,10 @@ def test_window_wrong_data():
 
     data_array = np.random.rand(n_subjects, n_regions)
 
-    size = 20
+    length = 20
     step = 5
     with pytest.raises(ValueError):
-        window(data_array, size, step)
+        window(data_array, length, step)
 
 
 def test_validate_data_array_string():
@@ -66,10 +66,10 @@ def test_validate_data_array_string():
     matrix = np.random.rand(n_subjects, n_regions, n_samples).astype(object)
     matrix[0, 0, 0] = "a"
 
-    size = 20
+    length = 20
     step = 5
     with pytest.raises(ValueError):
-        window(matrix, size, step)
+        window(matrix, length, step)
 
 
 def test_validate_data_array_nan():
@@ -80,7 +80,26 @@ def test_validate_data_array_nan():
     matrix = np.random.rand(n_subjects, n_regions, n_samples)
     matrix[0, 0, 0] = np.nan
 
-    size = 20
+    length = 20
     step = 5
     with pytest.raises(ValueError):
-        window(matrix, size, step)
+        window(matrix, length, step)
+
+
+# def test_seconds_windower():
+#     np.random.seed(42)  # ver como cambiar esto
+#     n_subjects = 20
+#     n_regions = 90
+#     n_samples = 150
+#     data_array = np.random.rand(n_subjects, n_regions, n_samples)
+
+#     length = 20
+#     step = 5
+#     seconds_windower = SecondsWindower(length=length, )
+#     subjects, regions, windows, samples = sliding_window.shape
+
+#     n_windows_ref = int((n_samples - length) / step) + 1
+#     assert windows == n_windows_ref
+#     assert subjects == n_subjects
+#     assert regions == n_regions
+#     assert samples == length
