@@ -9,8 +9,27 @@ import numpy as np
 
 from sklearn.cluster import KMeans
 
+from sklearn.base import BaseEstimator, TransformerMixin
+
 from .utils import validate_groups_dict
 
+class DataConcatenate(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+    def transform(self, X):
+        validate_groups_dict(X)
+
+        data_concatenate = []
+        for group in X:
+            subjects, windows, rois, _ = X[group].shape
+            data = (
+                X[group]
+                .reshape(subjects, windows, -1)
+                .reshape(subjects * windows, -1)
+            )
+            data_concatenate.append(data)
+
+        return data_concatenate
 
 def clustering(groups_dict, n_clusters, **clustering_kwargs):
     """Perform k-means clustering on dynamic connectivity matrices.
