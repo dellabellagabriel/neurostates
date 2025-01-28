@@ -8,7 +8,14 @@ import numpy as np
 
 
 from .utils import validate_data_array
+from sklearn.base import BaseEstimator, TransformerMixin
 
+class DynamicConnectivity(BaseEstimator, TransformerMixin):
+    def __init__(self, method=None):
+        self.method = method
+    
+    def transform(self, X):
+        return connectivity(X,self.method)
 
 def connectivity(windowed_data_raw, method=None):
     """Represents the functional connectivity operation.\
