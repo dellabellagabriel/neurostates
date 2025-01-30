@@ -13,9 +13,13 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 from .utils import validate_groups_dict
 
-class DataConcatenate(BaseEstimator, TransformerMixin):
+class Concatenator(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
+
+    def fit(self, X):
+        return self
+
     def transform(self, X):
         validate_groups_dict(X)
 
@@ -28,6 +32,9 @@ class DataConcatenate(BaseEstimator, TransformerMixin):
                 .reshape(subjects * windows, -1)
             )
             data_concatenate.append(data)
+
+        data_concatenate = np.array(data_concatenate)
+        data_concatenate = data_concatenate.reshape(-1, rois**2)
 
         return data_concatenate
 

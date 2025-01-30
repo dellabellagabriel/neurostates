@@ -14,8 +14,11 @@ class DynamicConnectivity(BaseEstimator, TransformerMixin):
     def __init__(self, method=None):
         self.method = method
     
+    def fit(self, X):
+        return self
+
     def transform(self, X):
-        return connectivity(X,self.method)
+        return connectivity(X, self.method)
 
 def connectivity(windowed_data_raw, method=None):
     """Represents the functional connectivity operation.\

@@ -10,11 +10,14 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from .utils import validate_data_array
 
 class SecondsWindower(BaseEstimator, TransformerMixin):
-    def __init__(self, length, step, tapering_function, sample_rate):
+    def __init__(self, length, step, sample_rate, tapering_function=None):
         self.length = length
         self.step = step
         self.tapering_function = tapering_function
         self.sample_rate = sample_rate
+
+    def fit(self, X):
+        return self
 
     def transform(self, X):
         return window(X, length=int(self.length*self.sample_rate), step=int(self.step*self.sample_rate), tapering_function=self.tapering_function)
