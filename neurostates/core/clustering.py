@@ -7,11 +7,11 @@ connectivity."""
 
 import numpy as np
 
+from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.cluster import KMeans
 
-from sklearn.base import BaseEstimator, TransformerMixin
-
 from .utils import validate_groups_dict
+
 
 class Concatenator(BaseEstimator, TransformerMixin):
     def __init__(self):
@@ -37,6 +37,7 @@ class Concatenator(BaseEstimator, TransformerMixin):
         data_concatenate = data_concatenate.reshape(-1, rois**2)
 
         return data_concatenate
+
 
 def clustering(groups_dict, n_clusters, **clustering_kwargs):
     """Perform k-means clustering on dynamic connectivity matrices.

@@ -1,4 +1,4 @@
-from neurostates.core.window import window, SamplesWindower, SecondsWindower
+from neurostates.core.window import SamplesWindower, SecondsWindower, window
 
 import numpy as np
 
@@ -96,10 +96,17 @@ def test_seconds_windower():
 
     length_in_seconds = 10
     step_in_seconds = 2.5
-    length_in_samples = int(length_in_seconds*sample_rate)
-    step_in_samples = int(step_in_seconds*sample_rate)
-    seconds_windower = SecondsWindower(length=length_in_seconds, step=step_in_seconds, tapering_function=hamming, sample_rate=sample_rate)
-    subjects, regions, windows, samples = seconds_windower.transform(data_array).shape
+    length_in_samples = int(length_in_seconds * sample_rate)
+    step_in_samples = int(step_in_seconds * sample_rate)
+    seconds_windower = SecondsWindower(
+        length=length_in_seconds,
+        step=step_in_seconds,
+        tapering_function=hamming,
+        sample_rate=sample_rate,
+    )
+    subjects, regions, windows, samples = seconds_windower.transform(
+        data_array
+    ).shape
 
     n_windows_ref = int((n_samples - length_in_samples) / step_in_samples) + 1
     assert windows == n_windows_ref
@@ -117,8 +124,14 @@ def test_samples_windower():
 
     length_in_samples = 20
     step_in_samples = 5
-    samples_windower = SamplesWindower(length=length_in_samples, step=step_in_samples, tapering_function=hamming)
-    subjects, regions, windows, samples = samples_windower.transform(data_array).shape
+    samples_windower = SamplesWindower(
+        length=length_in_samples,
+        step=step_in_samples,
+        tapering_function=hamming,
+    )
+    subjects, regions, windows, samples = samples_windower.transform(
+        data_array
+    ).shape
 
     n_windows_ref = int((n_samples - length_in_samples) / step_in_samples) + 1
     assert windows == n_windows_ref

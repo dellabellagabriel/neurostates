@@ -1,5 +1,5 @@
-from neurostates.core.connectivity import connectivity, DynamicConnectivity
-from neurostates.core.window import window, SamplesWindower
+from neurostates.core.connectivity import DynamicConnectivity, connectivity
+from neurostates.core.window import SamplesWindower, window
 
 import numpy as np
 
@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 
 from scipy.signal.windows import hamming
+
 
 def test_connectivity_shape():
     np.random.seed(42)
@@ -57,18 +58,22 @@ def test_validate_data_array_nan():
 
 
 def test_dynamic_connectivity():
-        np.random.seed(42)
-        n_subjects = 20
-        n_regions = 90
-        n_samples = 150
-        matrix = np.random.rand(n_subjects, n_regions, n_samples)
+    np.random.seed(42)
+    n_subjects = 20
+    n_regions = 90
+    n_samples = 150
+    matrix = np.random.rand(n_subjects, n_regions, n_samples)
 
-        length_in_samples = 20
-        step_in_samples = 5
-        sliding_windower = SamplesWindower(length=length_in_samples, step=step_in_samples, tapering_function=hamming)
-        sliging_window = sliding_windower.transform(matrix)
+    length_in_samples = 20
+    step_in_samples = 5
+    sliding_windower = SamplesWindower(
+        length=length_in_samples,
+        step=step_in_samples,
+        tapering_function=hamming,
+    )
+    sliging_window = sliding_windower.transform(matrix)
 
-        dynamic_connectivity = DynamicConnectivity()
-        connectivity_output = dynamic_connectivity.transform(sliging_window).shape
+    dynamic_connectivity = DynamicConnectivity()
+    connectivity_output = dynamic_connectivity.transform(sliging_window).shape
 
-        assert connectivity_output == (20, 27, 90, 90)
+    assert connectivity_output == (20, 27, 90, 90)
