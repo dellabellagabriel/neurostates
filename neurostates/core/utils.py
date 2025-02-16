@@ -30,6 +30,8 @@ def validate_groups_dict(groups_dict):
 
 
 def compute_frequencies(labels, n_centroids):
+    """Calculates the relative frequencies of each centroid in a list\
+    of labels."""
     centroid_freqs = []
     for centroid in range(n_centroids):
         centroid_freqs.append(
