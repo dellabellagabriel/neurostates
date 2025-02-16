@@ -8,8 +8,23 @@ classify the connectivity matrices by comparing them to the centroids."""
 import numpy as np
 
 from scipy.spatial.distance import cdist
+from sklearn.base import BaseEstimator, TransformerMixin
 
-from .utils import validate_data_array, validate_groups_dict
+from .utils import validate_data_array, validate_groups_dict, compute_frequencies
+
+class Frequencies(BaseEstimator, TransformerMixin):
+    def __init__(self, centroids, metric="euclidean"):
+        n_clusters, n_rois2 = centroids.shape
+        self.centroids = centroids.reshape(n_clusters, int(np.sqrt(n_rois2)), int(np.sqrt(n_rois2)))
+        self.metric = metric
+
+    def fit(self, X):
+        return self
+    
+    def transform(self, X):
+        labels, freqs = classification(X, self.centroids, self.metric)
+        self.labels_ = labels
+        return freqs
 
 
 # TODO: agregar criterio para ordenamiento de centroides
@@ -67,9 +82,7 @@ def classification(groups_dict, centroids, metric="euclidean"):
             # in ascending order.
             # This guarantees that all frequencies for all subjects
             # are in the same order.
-            centroids_idx, frequencies = np.unique(labels, return_counts=True)
-            sort_idx = np.argsort(centroids_idx)
-            subjects_freqs[subject] = frequencies[sort_idx]
+            subjects_freqs[subject] = compute_frequencies(labels, n_centroids)
             subjects_labels[subject, :] = labels
 
         group_labels[group] = subjects_labels

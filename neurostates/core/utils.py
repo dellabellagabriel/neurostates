@@ -27,3 +27,11 @@ def validate_groups_dict(groups_dict):
         raise TypeError("groups_dict must be a dictionary")
     for group in groups_dict:
         validate_data_array(groups_dict[group], ndim=4)
+
+
+def compute_frequencies(labels, n_centroids):
+    centroid_freqs = []
+    for centroid in range(n_centroids):
+        centroid_freqs.append(np.sum(np.array(labels) == centroid) / len(labels))
+
+    return centroid_freqs
