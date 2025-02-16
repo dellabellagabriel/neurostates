@@ -15,10 +15,10 @@ class DynamicConnectivity(BaseEstimator, TransformerMixin):
     def __init__(self, method=None):
         self.method = method
 
-    def fit(self, X):
+    def fit(self, X):  # noqa: N803
         return self
 
-    def transform(self, X):
+    def transform(self, X):  # noqa: N803
         return connectivity(X, self.method)
 
 

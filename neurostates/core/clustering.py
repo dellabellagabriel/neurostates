@@ -8,7 +8,6 @@ connectivity."""
 import numpy as np
 
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.cluster import KMeans
 
 from .utils import validate_groups_dict
 
@@ -17,10 +16,10 @@ class Concatenator(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
 
-    def fit(self, X):
+    def fit(self, X):  # noqa: N803
         return self
 
-    def transform(self, X):
+    def transform(self, X):  # noqa: N803
         validate_groups_dict(X)
 
         data_concatenate = []

@@ -18,10 +18,10 @@ class SecondsWindower(BaseEstimator, TransformerMixin):
         self.tapering_function = tapering_function
         self.sample_rate = sample_rate
 
-    def fit(self, X):
+    def fit(self, X):  # noqa: N803
         return self
 
-    def transform(self, X):
+    def transform(self, X):  # noqa: N803
         return window(
             X,
             length=int(self.length * self.sample_rate),
@@ -31,12 +31,15 @@ class SecondsWindower(BaseEstimator, TransformerMixin):
 
 
 class SamplesWindower(BaseEstimator, TransformerMixin):
-    def __init__(self, length, step, tapering_function):
+    def __init__(self, length, step, tapering_function=None):
         self.length = length
         self.step = step
         self.tapering_function = tapering_function
 
-    def transform(self, X):
+    def fit(self, X):  # noqa: N803
+        return self
+
+    def transform(self, X):  # noqa: N803
         return window(
             X,
             length=self.length,

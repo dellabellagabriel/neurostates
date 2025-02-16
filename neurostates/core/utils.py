@@ -32,6 +32,8 @@ def validate_groups_dict(groups_dict):
 def compute_frequencies(labels, n_centroids):
     centroid_freqs = []
     for centroid in range(n_centroids):
-        centroid_freqs.append(np.sum(np.array(labels) == centroid) / len(labels))
+        centroid_freqs.append(
+            np.sum(np.array(labels) == centroid) / len(labels)
+        )
 
     return centroid_freqs

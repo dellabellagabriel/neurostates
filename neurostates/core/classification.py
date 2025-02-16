@@ -8,20 +8,28 @@ classify the connectivity matrices by comparing them to the centroids."""
 import numpy as np
 
 from scipy.spatial.distance import cdist
+
 from sklearn.base import BaseEstimator, TransformerMixin
 
-from .utils import validate_data_array, validate_groups_dict, compute_frequencies
+from .utils import (
+    compute_frequencies,
+    validate_data_array,
+    validate_groups_dict,
+)
+
 
 class Frequencies(BaseEstimator, TransformerMixin):
     def __init__(self, centroids, metric="euclidean"):
         n_clusters, n_rois2 = centroids.shape
-        self.centroids = centroids.reshape(n_clusters, int(np.sqrt(n_rois2)), int(np.sqrt(n_rois2)))
+        self.centroids = centroids.reshape(
+            n_clusters, int(np.sqrt(n_rois2)), int(np.sqrt(n_rois2))
+        )
         self.metric = metric
 
-    def fit(self, X):
+    def fit(self, X):  # noqa: N803
         return self
-    
-    def transform(self, X):
+
+    def transform(self, X):  # noqa: N803
         labels, freqs = classification(X, self.centroids, self.metric)
         self.labels_ = labels
         return freqs
