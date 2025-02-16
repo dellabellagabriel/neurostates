@@ -41,8 +41,8 @@ class Frequencies(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):  # noqa: N803
         """
-        This method does nothing but is required by the scikit-learn\
-        interface.
+        Required by the scikit-learn\
+        interface.\
         No parameters are fit in this transformer.
 
         Parameters
@@ -76,7 +76,6 @@ class Frequencies(BaseEstimator, TransformerMixin):
             freqs: dict[str, ndarray]
             A dictionary of frequencies for the centroids for each group
         """
-
         labels, freqs = classification(X, self.centroids, self.metric)
         self.labels_ = labels
         return freqs

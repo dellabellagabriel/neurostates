@@ -21,8 +21,8 @@ class Concatenator(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):  # noqa: N803
         """
-        This method does nothing but is required by the scikit-learn\
-        interface.
+        Required by the scikit-learn\
+        interface.\
         No parameters are fit in this transformer.
 
         Parameters
@@ -57,7 +57,6 @@ class Concatenator(BaseEstimator, TransformerMixin):
             A concatenated matrix of size\
             n_subjects*n_windows x n_rois*n_rois
         """
-
         validate_groups_dict(X)
 
         data_concatenate = []

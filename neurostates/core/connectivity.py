@@ -27,8 +27,8 @@ class DynamicConnectivity(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):  # noqa: N803
         """
-        This method does nothing but is required by the scikit-learn\
-        interface.
+        Required by the scikit-learn\
+        interface.\
         No parameters are fit in this transformer.
 
         Parameters
