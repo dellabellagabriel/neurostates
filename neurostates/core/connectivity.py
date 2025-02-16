@@ -12,13 +12,54 @@ from .utils import validate_data_array
 
 
 class DynamicConnectivity(BaseEstimator, TransformerMixin):
+    """Calculate the dynamic connectivity windows based on the\
+    windowed neuroimage timeseries.
+
+    Parameters
+    ----------
+    method : callable
+        The function to use when calculating the correlation\
+        between two timeseries.
+    """
+
     def __init__(self, method=None):
         self.method = method
 
-    def fit(self, X):  # noqa: N803
+    def fit(self, X, y=None):  # noqa: N803
+        """
+        This method does nothing but is required by the scikit-learn\
+        interface.
+        No parameters are fit in this transformer.
+
+        Parameters
+        ----------
+        X : array-like, shape (n_samples, n_features)
+            Input data to fit the transformer.
+        y : array-like, shape (n_samples,), default=None
+            Target labels (not used in this case).
+
+        Returns
+        -------
+        self : object
+            The fitted transformer (no changes in this case).
+        """
         return self
 
     def transform(self, X):  # noqa: N803
+        """
+        Transforms a windowed timeseries into dynamic connectivity\
+        matrices.
+
+        Parameters
+        ----------
+        X : ndarray
+            A numpy array of size n_subjects x n_windows x n_rois x n_samples
+
+        Returns
+        -------
+        connectivity: ndarray
+            A numpy array of size n_subjects x n_windows x n_rois x n_rois
+        """
         return connectivity(X, self.method)
 
 
