@@ -19,6 +19,19 @@ from .utils import (
 
 
 class Frequencies(BaseEstimator, TransformerMixin):
+    """Perform the calculation of frequencies based on centroids from\
+    clustering and a dictionary of dynamic connectivity matrices.
+
+    Parameters
+    ----------
+    centroids : ndarray
+        An array of centroids from the clustering step of size\
+        n_clusters x n_rois x n_rois.
+    metric : str or callable, default='euclidean'
+        The distance metric to use. It can be a str or callable\
+        per scipy's cdit() documentation.
+    """
+
     def __init__(self, centroids, metric="euclidean"):
         n_clusters, n_rois2 = centroids.shape
         self.centroids = centroids.reshape(
@@ -26,10 +39,44 @@ class Frequencies(BaseEstimator, TransformerMixin):
         )
         self.metric = metric
 
-    def fit(self, X):  # noqa: N803
+    def fit(self, X, y=None):  # noqa: N803
+        """
+        This method does nothing but is required by the scikit-learn\
+        interface.
+        No parameters are fit in this transformer.
+
+        Parameters
+        ----------
+        X : array-like, shape (n_samples, n_features)
+            Input data to fit the transformer.
+        y : array-like, shape (n_samples,), default=None
+            Target labels (not used in this case).
+
+        Returns
+        -------
+        self : object
+            The fitted transformer (no changes in this case).
+        """
         return self
 
     def transform(self, X):  # noqa: N803
+        """
+        Transforms a dictionary of dynamic connectivity matrices to a\
+        dictionary of frequencies.\
+        These frequencies represent how often the matrices are classified\
+        as each centroid.
+
+        Parameters
+        ----------
+        X : dict[str, ndarray]
+            A dictionary of dynamic connectivity matrices per group
+
+        Returns
+        -------
+            freqs: dict[str, ndarray]
+            A dictionary of frequencies for the centroids for each group
+        """
+
         labels, freqs = classification(X, self.centroids, self.metric)
         self.labels_ = labels
         return freqs
