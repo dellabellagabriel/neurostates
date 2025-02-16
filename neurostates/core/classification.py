@@ -2,7 +2,7 @@
 # Copyright (c) 2024, Della Bella, Gabriel; Rodriguez, Natalia
 # All rights reserved.
 
-"""classification uses the output from clustering and connectivity to\
+"""classification uses the output from clustering and connectivity to \
 classify the connectivity matrices by comparing them to the centroids."""
 
 import numpy as np
