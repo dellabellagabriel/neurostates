@@ -1,16 +1,24 @@
-from pathlib import Path
+# License: BSD-3 (https://tldrlegal.com/license/bsd-3-clause-license-(revised))
+# Copyright (c) 2024, Della Bella, Gabriel; Rodriguez, Natalia
+# All rights reserved.
+
+# from pathlib import Path
 
 from neurostates.core.connectivity import DynamicConnectivity, connectivity
-from neurostates.core.window import SamplesWindower, SecondsWindower, window
+from neurostates.core.window import (
+    SamplesWindower,
+    # SecondsWindower,
+    window,
+)
 
 import numpy as np
 
 import pytest
 
-import scipy.io as sio
+# import scipy.io as sio
 from scipy.signal.windows import hamming
 
-from sklearn.pipeline import Pipeline
+# from sklearn.pipeline import Pipeline
 
 
 def test_connectivity_shape():
