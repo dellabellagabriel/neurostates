@@ -6,10 +6,7 @@
 Neurostates documentation
 =========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+**Neurostates** is a Python package for detecting recurrent functional connectivity patterns (also known as brain states) and estimating their occurrence probabilities in EEG and fMRI.
 
 .. toctree::
    :maxdepth: 2
@@ -18,5 +15,6 @@ documentation for details.
    introduction
    installation
    usage
-   modules
    contributing
+   modules
+   license

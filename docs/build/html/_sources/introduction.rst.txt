@@ -1,54 +1,47 @@
 Introduction
 ============
 
-Welcome to **My Project** documentation!
+Welcome to **Neurostates** documentation!
 
-**My Project** is a Python package designed to make it easier to handle [describe the main purpose of the project, e.g., data processing, web scraping, machine learning, etc.]. It offers a simple interface and robust functionality to streamline [use case or target domain of the project].
+**Neurostates** is a Python package that aims to standardize the analysis of consciousness states through recurrent brain connectivity patterns,
+commonly referred to in the literature as "Brain States." The project provides tools for detecting recurrent brain states,
+identifying their specific connectivity patterns, and estimating their probability of occurrence based on preprocessed neuroimaging data,
+specifically Electroencephalography (EEG) and functional Magnetic Resonance Imaging (fMRI).
 
-What You Can Do with **My Project**
+What You Can Do with **Neurostates**
 ------------------------------------
 
-- **Feature 1**: Easily handle [describe specific functionality, e.g., large datasets].
-- **Feature 2**: Integrate seamlessly with [mention other software, systems, or services the project interacts with].
-- **Feature 3**: Perform advanced operations like [specific tasks it helps with, e.g., predictive modeling, data transformation].
-- **Feature 4**: Customize and extend the package to fit your specific needs.
+- Compute dynamic functional connectivity using different methods (e.g., Pearson, wSMI).
+- Cluster functional connectivity matrices (e.g., k-means, DBSCAN).
+- Determine the optimal k for k-means (e.g., elbow method).
+- Rank brain states based on entropy or other measures (e.g., structural similarity).
+- Construct the probability distribution of brain states for each subject.
+- Visualize data and results, including dynamic connectivity matrices, probability distributions, and transition matrices.
+- Perform statistical significance tests on the results (e.g., t-test, mixed-effects model).
 
-Key Features
--------------
-
-Here are some of the core features of **My Project**:
-
-1. **Modular Design**: The project is divided into easily understandable modules, which makes it easier to extend and adapt to your specific use case.
-2. **High Performance**: Optimized for high performance, even with large data sets.
-3. **Comprehensive Documentation**: Detailed examples, usage guides, and API reference to help you get started quickly.
-4. **Open Source**: **My Project** is fully open source, and contributions are always welcome!
-
-Why Use **My Project**?
+Why Use **Neurostates**?
 ------------------------
 
-- **Efficiency**: Saves time with intuitive functions and tools.
-- **Scalability**: Can handle small, medium, and large-scale tasks with ease.
-- **Community**: Active community contributing to the improvement of the project.
+**Neurostates** is designed to be both **easy to use** and **highly flexible**. It leverages scikit-learn estimators and pipelines,
+allowing seamless processing from one step to the next while enabling access to intermediate results.
+Users can get started quickly with default settings, but the framework also supports customization, allowing the use of custom
+connectivity metrics, clustering algorithms, and other analysis methods to suit specific research needs.
 
 Getting Started
 ---------------
 
-To get started with **My Project**, follow the installation guide, and you can start using the modules straight away. The documentation will guide you through the setup and provide examples on how to use the most common features.
+To get started with **Neurostates**, follow the :doc:`installation guide <installation>`, and you can start using the modules straight away.
+The documentation will guide you through the setup and provide examples on how to use the most common features.
 
 Documentation Overview
 ----------------------
 
 This documentation is organized as follows:
 
-- **Installation**: How to install **My Project**.
+- **Installation**: How to install **Neurostates**.
 - **Usage**: Examples and instructions on how to use the core features.
 - **Modules**: A comprehensive list and description of the available modules.
-- **API Reference**: Detailed documentation of the project’s classes, methods, and functions.
-- **Contributing**: How you can contribute to the project.
 
 ---
 
-If you have any questions, feel free to check out our FAQ section, or you can reach out to the community via [project’s community channels, e.g., GitHub Issues, Slack, or Forums].
-
-Thank you for choosing **My Project**!
-
+If you have any questions, feel free to check out our Github issues or write us an email to: dellabellagabriel@gmail.com or natirodriguez114@gmail.com

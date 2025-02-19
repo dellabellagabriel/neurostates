@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Introduction &#8212; Neurostates 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
     <script src="_static/documentation_options.js?v=2709fde1"></script>
@@ -35,52 +35,45 @@
             
   <section id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h1>
-<p>Welcome to <strong>My Project</strong> documentation!</p>
-<p><strong>My Project</strong> is a Python package designed to make it easier to handle [describe the main purpose of the project, e.g., data processing, web scraping, machine learning, etc.]. It offers a simple interface and robust functionality to streamline [use case or target domain of the project].</p>
-<section id="what-you-can-do-with-my-project">
-<h2>What You Can Do with <strong>My Project</strong><a class="headerlink" href="#what-you-can-do-with-my-project" title="Link to this heading">¶</a></h2>
+<p>Welcome to <strong>Neurostates</strong> documentation!</p>
+<p><strong>Neurostates</strong> is a Python package that aims to standardize the analysis of consciousness states through recurrent brain connectivity patterns,
+commonly referred to in the literature as “Brain States.” The project provides tools for detecting recurrent brain states,
+identifying their specific connectivity patterns, and estimating their probability of occurrence based on preprocessed neuroimaging data,
+specifically Electroencephalography (EEG) and functional Magnetic Resonance Imaging (fMRI).</p>
+<section id="what-you-can-do-with-neurostates">
+<h2>What You Can Do with <strong>Neurostates</strong><a class="headerlink" href="#what-you-can-do-with-neurostates" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Feature 1</strong>: Easily handle [describe specific functionality, e.g., large datasets].</p></li>
-<li><p><strong>Feature 2</strong>: Integrate seamlessly with [mention other software, systems, or services the project interacts with].</p></li>
-<li><p><strong>Feature 3</strong>: Perform advanced operations like [specific tasks it helps with, e.g., predictive modeling, data transformation].</p></li>
-<li><p><strong>Feature 4</strong>: Customize and extend the package to fit your specific needs.</p></li>
+<li><p>Compute dynamic functional connectivity using different methods (e.g., Pearson, wSMI).</p></li>
+<li><p>Cluster functional connectivity matrices (e.g., k-means, DBSCAN).</p></li>
+<li><p>Determine the optimal k for k-means (e.g., elbow method).</p></li>
+<li><p>Rank brain states based on entropy or other measures (e.g., structural similarity).</p></li>
+<li><p>Construct the probability distribution of brain states for each subject.</p></li>
+<li><p>Visualize data and results, including dynamic connectivity matrices, probability distributions, and transition matrices.</p></li>
+<li><p>Perform statistical significance tests on the results (e.g., t-test, mixed-effects model).</p></li>
 </ul>
 </section>
-<section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
-<p>Here are some of the core features of <strong>My Project</strong>:</p>
-<ol class="arabic simple">
-<li><p><strong>Modular Design</strong>: The project is divided into easily understandable modules, which makes it easier to extend and adapt to your specific use case.</p></li>
-<li><p><strong>High Performance</strong>: Optimized for high performance, even with large data sets.</p></li>
-<li><p><strong>Comprehensive Documentation</strong>: Detailed examples, usage guides, and API reference to help you get started quickly.</p></li>
-<li><p><strong>Open Source</strong>: <strong>My Project</strong> is fully open source, and contributions are always welcome!</p></li>
-</ol>
-</section>
-<section id="why-use-my-project">
-<h2>Why Use <strong>My Project</strong>?<a class="headerlink" href="#why-use-my-project" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Efficiency</strong>: Saves time with intuitive functions and tools.</p></li>
-<li><p><strong>Scalability</strong>: Can handle small, medium, and large-scale tasks with ease.</p></li>
-<li><p><strong>Community</strong>: Active community contributing to the improvement of the project.</p></li>
-</ul>
+<section id="why-use-neurostates">
+<h2>Why Use <strong>Neurostates</strong>?<a class="headerlink" href="#why-use-neurostates" title="Link to this heading">¶</a></h2>
+<p><strong>Neurostates</strong> is designed to be both <strong>easy to use</strong> and <strong>highly flexible</strong>. It leverages scikit-learn estimators and pipelines,
+allowing seamless processing from one step to the next while enabling access to intermediate results.
+Users can get started quickly with default settings, but the framework also supports customization, allowing the use of custom
+connectivity metrics, clustering algorithms, and other analysis methods to suit specific research needs.</p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
-<p>To get started with <strong>My Project</strong>, follow the installation guide, and you can start using the modules straight away. The documentation will guide you through the setup and provide examples on how to use the most common features.</p>
+<p>To get started with <strong>Neurostates</strong>, follow the <a class="reference internal" href="installation.html"><span class="doc">installation guide</span></a>, and you can start using the modules straight away.
+The documentation will guide you through the setup and provide examples on how to use the most common features.</p>
 </section>
 <section id="documentation-overview">
 <h2>Documentation Overview<a class="headerlink" href="#documentation-overview" title="Link to this heading">¶</a></h2>
 <p>This documentation is organized as follows:</p>
 <ul class="simple">
-<li><p><strong>Installation</strong>: How to install <strong>My Project</strong>.</p></li>
+<li><p><strong>Installation</strong>: How to install <strong>Neurostates</strong>.</p></li>
 <li><p><strong>Usage</strong>: Examples and instructions on how to use the core features.</p></li>
 <li><p><strong>Modules</strong>: A comprehensive list and description of the available modules.</p></li>
-<li><p><strong>API Reference</strong>: Detailed documentation of the project’s classes, methods, and functions.</p></li>
-<li><p><strong>Contributing</strong>: How you can contribute to the project.</p></li>
 </ul>
 <p>—</p>
-<p>If you have any questions, feel free to check out our FAQ section, or you can reach out to the community via [project’s community channels, e.g., GitHub Issues, Slack, or Forums].</p>
-<p>Thank you for choosing <strong>My Project</strong>!</p>
+<p>If you have any questions, feel free to check out our Github issues or write us an email to: <a class="reference external" href="mailto:dellabellagabriel&#37;&#52;&#48;gmail&#46;com">dellabellagabriel<span>&#64;</span>gmail<span>&#46;</span>com</a> or <a class="reference external" href="mailto:natirodriguez114&#37;&#52;&#48;gmail&#46;com">natirodriguez114<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
 </section>
 </section>
 
@@ -113,15 +106,16 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-you-can-do-with-my-project">What You Can Do with <strong>My Project</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#key-features">Key Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#why-use-my-project">Why Use <strong>My Project</strong>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-you-can-do-with-neurostates">What You Can Do with <strong>Neurostates</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-use-neurostates">Why Use <strong>Neurostates</strong>?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#documentation-overview">Documentation Overview</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">neurostates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
 <div class="relations">

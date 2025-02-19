@@ -1,14 +1,14 @@
-Contributing
-============
+Code repository and Issues
+==========================
 
-We're excited that you're interested in contributing to **My Project**! Your contributions help make the project better, and we welcome any improvements, whether it's fixing bugs, adding new features, improving documentation, or suggesting enhancements.
+We're excited that you're interested in contributing to **Neurostates**! Your contributions help make the project better, and we welcome any improvements, whether it's fixing bugs, adding new features, improving documentation, or suggesting enhancements.
 
 Please follow the guidelines below to ensure that your contributions are in line with the project's needs and practices.
 
 How to Contribute
 -----------------
 
-There are many ways you can contribute to **My Project**:
+There are many ways you can contribute to **Neurostates**:
 
 - **Bug Reports**: If you find any bugs or issues, please report them.
 - **Feature Requests**: If you have an idea for a new feature, let us know!
@@ -22,12 +22,13 @@ Getting Started
 
    Start by forking the repository on GitHub. This creates a copy of the project under your GitHub account.
 
-   [Fork My Project on GitHub](https://github.com/yourusername/myproject)
+   `https://github.com/dellabellagabriel/neurostates <https://github.com/dellabellagabriel/neurostates>`_
 
 2. **Clone your fork**:
 
    Once you've forked the repository, clone it to your local machine to make changes.
 
-   ```bash
-   git clone https://github.com/yourusername/myproject.git
-   cd myproject
+.. code-block:: bash
+
+   git clone https://github.com/dellabellagabriel/neurostates.git
+   cd neurostates
