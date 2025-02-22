@@ -6,7 +6,10 @@
 
 import numpy as np
 
+from scipy.stats import spearmanr
+
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.metrics.pairwise import cosine_similarity
 
 from .utils import validate_data_array
 
@@ -17,12 +20,16 @@ class DynamicConnectivity(BaseEstimator, TransformerMixin):
 
     Parameters
     ----------
-    method : callable
-        The function to use when calculating the correlation\
-        between two timeseries.
+    method : str or callable
+        The measure that will be used to compute the connectivity between\
+        regions. Options are: pearson, cosine_similarity, spearmanr.\
+        It also allows a function to be passed. This function should\
+        take a regions x time matrix and return regions x regions.\
+        Default is pearson, which means the method will be the\
+        Pearson correlation (np.corrcoef).
     """
 
-    def __init__(self, method=None):
+    def __init__(self, method="pearson"):
         self.method = method
 
     def fit(self, X, y=None):  # noqa: N803
@@ -63,7 +70,7 @@ class DynamicConnectivity(BaseEstimator, TransformerMixin):
         return connectivity(X, self.method)
 
 
-def connectivity(windowed_data_raw, method=None):
+def connectivity(windowed_data_raw, method="pearson"):
     """Represents the functional connectivity operation.\
     This usually comes from the output of window function.
 
@@ -73,9 +80,12 @@ def connectivity(windowed_data_raw, method=None):
         The output of window function.
         The shape should be subjets x regions x window x samples.
 
-    method: callable
-        The function that will be used to compute the connectivity between
-        regions. Default is None, which means the method will be the
+    method: str or callable
+        The measure that will be used to compute the connectivity between\
+        regions. Options are: pearson, cosine_similarity, spearmanr.\
+        It also allows a function to be passed. This function should\
+        take a regions x time matrix and return regions x regions.\
+        Default is pearson, which means the method will be the\
         Pearson correlation (np.corrcoef).
 
     Returns
@@ -87,7 +97,12 @@ def connectivity(windowed_data_raw, method=None):
     windowed_data = validate_data_array(windowed_data_raw, ndim=4)
 
     subjects, regions, windows, _ = windowed_data.shape
-    method = np.corrcoef if method is None else method
+    if method is None or method == "pearson":
+        method = np.corrcoef
+    elif method == "cosine_similarity":
+        method = cosine_similarity
+    elif method == "spearmanr":
+        method = spearmanr
 
     connectivity_data = np.empty(
         (
