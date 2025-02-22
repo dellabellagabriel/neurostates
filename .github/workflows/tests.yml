@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        tox_env: [py39, py310, py311, py312]
+        tox_env: [py39, py310, py311, py312, py313]
         include:
           - tox_env: style
           - tox_env: docstyle
@@ -23,21 +23,23 @@ jobs:
 
     # the steps of the CI
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
 
       - name: Determine Python version
         id: pyversion
-        if: ${{ startsWith( matrix.tox_env, 'py3' ) }}
+        if: ${{ startsWith(matrix.tox_env, 'py3') }}
         uses: bluwy/substitute-string-action@v1
         with:
           _input-text: ${{ matrix.tox_env }}
-          py3: "3."
+          _format-key: "py3=3."
 
-      # tox steps
-      - name: Set up Python ${{ steps.pyversion.outputs.result || env.default-python }}
-        uses: actions/setup-python@v2
+      - name: Set up Python
+        run: echo "PYTHON_VERSION=${{ steps.pyversion.outputs.result || env.default-python }}" >> $GITHUB_ENV
+
+      - name: Use Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v4
         with:
-          python-version: ${{ steps.pyversion.outputs.result || env.default-python }}
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install tox
         run: pip install tox
