@@ -2,12 +2,12 @@
 # Copyright (c) 2024, Della Bella, Gabriel; Rodriguez, Natalia
 # All rights reserved.
 
-# from pathlib import Path
+from pathlib import Path
 
 from neurostates.core.connectivity import DynamicConnectivity, connectivity
 from neurostates.core.window import (
     SamplesWindower,
-    # SecondsWindower,
+    SecondsWindower,
     window,
 )
 
@@ -15,10 +15,10 @@ import numpy as np
 
 import pytest
 
-# import scipy.io as sio
+import scipy.io as sio
 from scipy.signal.windows import hamming
 
-# from sklearn.pipeline import Pipeline
+from sklearn.pipeline import Pipeline
 
 
 def test_connectivity_shape():
@@ -91,51 +91,55 @@ def test_dynamic_connectivity_shape():
     assert connectivity_output == (20, 27, 90, 90)
 
 
-# def test_dynamic_connectivity_seconds_windower():
-#     path_to_tests = Path("tests/core")
-#     dataset_controls = sio.loadmat(
-#         path_to_tests / "dataset" / "controls_singleprec.mat"
-#     )["ts"]
-#     ground_truth_dynamic_connectivity = sio.loadmat(
-#         path_to_tests / "connectivity" / "dynamic_connectivity_controls.mat"
-#     )["dynamic_connectivity"]
+def test_dynamic_connectivity_seconds_windower():
+    path_to_tests = Path("tests/core")
+    dataset_controls = sio.loadmat(
+        path_to_tests / "dataset" / "controls_singleprec.mat"
+    )["ts"]
+    ground_truth_dynamic_connectivity = sio.loadmat(
+        path_to_tests / "connectivity" / "dynamic_connectivity_controls.mat"
+    )["dynamic_connectivity"]
 
-#     connectivity_pipeline = Pipeline(
-#         [
-#             ("windower", SecondsWindower(length=20, step=5, sample_rate=1)),
-#             ("connectivity", DynamicConnectivity(method=np.corrcoef)),
-#         ]
-#     )
+    connectivity_pipeline = Pipeline(
+        [
+            ("windower", SecondsWindower(length=20, step=5, sample_rate=1)),
+            ("connectivity", DynamicConnectivity(method=np.corrcoef)),
+        ]
+    )
 
-#     dynamic_connectivity = connectivity_pipeline.fit_transform(
-#         dataset_controls
-#     )
+    dynamic_connectivity = connectivity_pipeline.fit_transform(
+        dataset_controls
+    )
+    # take the first 3 windows to reduce space in testing
+    dynamic_connectivity = dynamic_connectivity[:, 0:3, :, :]
 
-#     np.testing.assert_allclose(
-#         ground_truth_dynamic_connectivity, dynamic_connectivity, atol=1e-5
-#     )
+    np.testing.assert_allclose(
+        ground_truth_dynamic_connectivity, dynamic_connectivity, atol=1e-5
+    )
 
 
-# def test_dynamic_connectivity_samples_windower():
-#     path_to_tests = Path("tests/core")
-#     dataset_controls = sio.loadmat(
-#         path_to_tests / "dataset" / "controls_singleprec.mat"
-#     )["ts"]
-#     ground_truth_dynamic_connectivity = sio.loadmat(
-#         path_to_tests / "connectivity" / "dynamic_connectivity_controls.mat"
-#     )["dynamic_connectivity"]
+def test_dynamic_connectivity_samples_windower():
+    path_to_tests = Path("tests/core")
+    dataset_controls = sio.loadmat(
+        path_to_tests / "dataset" / "controls_singleprec.mat"
+    )["ts"]
+    ground_truth_dynamic_connectivity = sio.loadmat(
+        path_to_tests / "connectivity" / "dynamic_connectivity_controls.mat"
+    )["dynamic_connectivity"]
 
-#     connectivity_pipeline = Pipeline(
-#         [
-#             ("windower", SamplesWindower(length=20, step=5)),
-#             ("connectivity", DynamicConnectivity(method=np.corrcoef)),
-#         ]
-#     )
+    connectivity_pipeline = Pipeline(
+        [
+            ("windower", SamplesWindower(length=20, step=5)),
+            ("connectivity", DynamicConnectivity(method=np.corrcoef)),
+        ]
+    )
 
-#     dynamic_connectivity = connectivity_pipeline.fit_transform(
-#         dataset_controls
-#     )
+    dynamic_connectivity = connectivity_pipeline.fit_transform(
+        dataset_controls
+    )
+    # take the first 3 windows to reduce space in testing
+    dynamic_connectivity = dynamic_connectivity[:, 0:3, :, :]
 
-#     np.testing.assert_allclose(
-#         ground_truth_dynamic_connectivity, dynamic_connectivity, atol=1e-5
-#     )
+    np.testing.assert_allclose(
+        ground_truth_dynamic_connectivity, dynamic_connectivity, atol=1e-5
+    )
