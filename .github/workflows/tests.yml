@@ -23,23 +23,21 @@ jobs:
 
     # the steps of the CI
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@master
 
       - name: Determine Python version
         id: pyversion
-        if: ${{ startsWith(matrix.tox_env, 'py3') }}
+        if: ${{ startsWith( matrix.tox_env, 'py3' ) }}
         uses: bluwy/substitute-string-action@v1
         with:
           _input-text: ${{ matrix.tox_env }}
-          _format-key: "py3=3."
+          py3: "3."
 
-      - name: Set up Python
-        run: echo "PYTHON_VERSION=${{ steps.pyversion.outputs.result || env.default-python }}" >> $GITHUB_ENV
-
-      - name: Use Python ${{ env.PYTHON_VERSION }}
-        uses: actions/setup-python@v4
+      # tox steps
+      - name: Set up Python ${{ steps.pyversion.outputs.result || env.default-python }}
+        uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: ${{ steps.pyversion.outputs.result || env.default-python }}
 
       - name: Install tox
         run: pip install tox
