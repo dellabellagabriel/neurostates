@@ -11,13 +11,10 @@ specifically Electroencephalography (EEG) and functional Magnetic Resonance Imag
 What You Can Do with **Neurostates**
 ------------------------------------
 
-- Compute dynamic functional connectivity using different methods (e.g., Pearson, wSMI).
-- Cluster functional connectivity matrices (e.g., k-means, DBSCAN).
-- Determine the optimal k for k-means (e.g., elbow method).
-- Rank brain states based on entropy or other measures (e.g., structural similarity).
+- Compute dynamic functional connectivity using different methods (e.g., Pearson, Cosine similarity, Spearman R, or a custom connectivity).
+- Cluster functional connectivity matrices (e.g., k-means or a custom clustering algorithm).
+- Rank brain states based on entropy.
 - Construct the probability distribution of brain states for each subject.
-- Visualize data and results, including dynamic connectivity matrices, probability distributions, and transition matrices.
-- Perform statistical significance tests on the results (e.g., t-test, mixed-effects model).
 
 Why Use **Neurostates**?
 ------------------------
