@@ -107,7 +107,7 @@ def test_clustering():
     connectivity_pipeline = Pipeline(
         [
             ("windower", SamplesWindower(length=20, step=5)),
-            ("connectivity", DynamicConnectivity(method=np.corrcoef)),
+            ("connectivity", DynamicConnectivity(method="pearson")),
         ]
     )
 

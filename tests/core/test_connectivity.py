@@ -103,7 +103,7 @@ def test_dynamic_connectivity_seconds_windower():
     connectivity_pipeline = Pipeline(
         [
             ("windower", SecondsWindower(length=20, step=5, sample_rate=1)),
-            ("connectivity", DynamicConnectivity(method=np.corrcoef)),
+            ("connectivity", DynamicConnectivity(method="pearson")),
         ]
     )
 
@@ -130,7 +130,7 @@ def test_dynamic_connectivity_samples_windower():
     connectivity_pipeline = Pipeline(
         [
             ("windower", SamplesWindower(length=20, step=5)),
-            ("connectivity", DynamicConnectivity(method=np.corrcoef)),
+            ("connectivity", DynamicConnectivity(method="pearson")),
         ]
     )
 
