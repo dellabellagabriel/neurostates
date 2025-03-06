@@ -2,6 +2,8 @@
 
 <img src="res/logo.png" alt="logo" width="60%">
 
+[![https://github.com/leliel12/diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
+
 **NeuroStates** is a Python package for detecting recurrent functional connectivity patterns (also known as brain states) and estimating their ocurrence probabilities in EEG and fMRI.
 
 # Install
