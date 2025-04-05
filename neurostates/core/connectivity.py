@@ -125,8 +125,10 @@ class DynamicConnectivityGroup(BaseEstimator, TransformerMixin):
         """
         dict_of_connectivity = {}
         for group in dict_of_groups.keys():
-            dict_of_connectivity[group] = connectivity(dict_of_groups[group], self.method)
-        
+            dict_of_connectivity[group] = connectivity(
+                dict_of_groups[group], self.method
+            )
+
         self.dict_of_groups_ = dict_of_connectivity
         return dict_of_connectivity
 

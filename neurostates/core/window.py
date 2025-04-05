@@ -142,7 +142,7 @@ class SamplesWindower(BaseEstimator, TransformerMixin):
 
 class SecondsWindowerGroup(BaseEstimator, TransformerMixin):
     """Perform the sliding window operation from the data's timeseries\
-    using seconds as the unit on a group basis
+    using seconds as the unit on a group basis.
 
     Parameters
     ----------
@@ -200,14 +200,14 @@ class SecondsWindowerGroup(BaseEstimator, TransformerMixin):
             A dictionary sliding window timeseries
         """
         dict_of_sliding_window = {}
-        for group in dict_of_groups.keys():    
+        for group in dict_of_groups.keys():
             dict_of_sliding_window[group] = window(
                 dict_of_groups[group],
                 length=int(self.length * self.sample_rate),
                 step=int(self.step * self.sample_rate),
                 tapering_function=self.tapering_function,
             )
-        
+
         self.dict_of_groups_ = dict_of_sliding_window
         return dict_of_sliding_window
 
@@ -268,7 +268,7 @@ class SamplesWindowerGroup(BaseEstimator, TransformerMixin):
             A dictionary of sliding window timeseries
         """
         dict_of_sliding_window = {}
-        for group in dict_of_groups.keys():    
+        for group in dict_of_groups.keys():
             dict_of_sliding_window[group] = window(
                 dict_of_groups[group],
                 length=self.length,
