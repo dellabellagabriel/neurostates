@@ -1,6 +1,6 @@
 # NeuroStates
 
-<img src="res/logo_final.png" alt="logo" width="60%">
+<img src="res/logo_final.png" alt="logo" width="20%">
 
 [![https://github.com/leliel12/diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
 
