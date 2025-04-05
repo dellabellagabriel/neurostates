@@ -70,6 +70,67 @@ class DynamicConnectivity(BaseEstimator, TransformerMixin):
         return connectivity(X, self.method)
 
 
+class DynamicConnectivityGroup(BaseEstimator, TransformerMixin):
+    """Calculate the dynamic connectivity windows based on the\
+    windowed neuroimage timeseries.
+
+    Parameters
+    ----------
+    method : str or callable
+        The measure that will be used to compute the connectivity between\
+        regions. Options are: pearson, cosine_similarity, spearmanr.\
+        It also allows a function to be passed. This function should\
+        take a regions x time matrix and return regions x regions.\
+        Default is pearson, which means the method will be the\
+        Pearson correlation (np.corrcoef).
+    """
+
+    def __init__(self, method="pearson"):
+        self.method = method
+
+    def fit(self, dict_of_groups, y=None):  # noqa: N803
+        """
+        Required by the scikit-learn\
+        interface.\
+        No parameters are fit in this transformer.
+
+        Parameters
+        ----------
+        X : array-like, shape (n_samples, n_features)
+            Input data to fit the transformer.
+        y : array-like, shape (n_samples,), default=None
+            Target labels (not used in this case).
+
+        Returns
+        -------
+        self : object
+            The fitted transformer (no changes in this case).
+        """
+        return self
+
+    def transform(self, dict_of_groups):  # noqa: N803
+        """
+        Transforms a windowed timeseries into dynamic connectivity\
+        matrices.
+
+        Parameters
+        ----------
+        X : ndarray
+            A numpy array of size n_subjects x n_windows x n_rois x n_samples
+
+        Returns
+        -------
+        connectivity: ndarray
+            A numpy array of size n_subjects x n_windows x n_rois x n_rois
+        """
+        dict_of_connectivity = {}
+        for group in dict_of_groups.keys():
+            dict_of_connectivity[group] = connectivity(dict_of_groups[group], self.method)
+        
+        self.dict_of_groups_ = dict_of_connectivity
+        return dict_of_connectivity
+
+
 def connectivity(windowed_data_raw, method="pearson"):
     """Represents the functional connectivity operation.\
     This usually comes from the output of window function.
