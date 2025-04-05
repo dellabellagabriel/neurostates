@@ -81,7 +81,7 @@ def sort_centroids_by_entropy(cluster_centers_):
 
     Parameters
     ----------
-        cluster_centers_ (np.ndarray): A k x N matrix
+        `cluster_centers_` (np.ndarray): A k x N matrix
         with k the number of centroids and N the features.
 
     Returns

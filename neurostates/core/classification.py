@@ -98,7 +98,7 @@ def classification(groups_dict, centroids, metric="euclidean"):
         matrices from connectivity().
 
         centroids (ndarray): An array of n_clusters x regions x regions.
-        **clustering_kwargs: Keyword arguments for clustering.
+        `**clustering_kwargs`: Keyword arguments for clustering.
 
         metric (str): Metric to use as a distance between matrices and\
         centroids. Default: "euclidean"

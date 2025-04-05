@@ -170,9 +170,11 @@ class SecondsWindowerGroup(BaseEstimator, TransformerMixin):
 
         Parameters
         ----------
-        dict_of_groups : dictionary of groups. Each key (group)
-        must be an ndarray of size n_subjects x n_rois x n_samples
-        y : array-like, shape (n_samples,), default=None
+        dict_of_groups : dict
+            dictionary of groups. Each key (group)
+            must be an ndarray of size n_subjects x n_rois x n_samples
+        y : ndarray
+            array-like, shape (n_samples,), default=None
             Target labels (not used in this case).
 
         Returns
