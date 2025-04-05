@@ -187,7 +187,7 @@ plt.show()
 <img src="res/frequencies.png" alt="logo" width="50%">
 
 # Documentation
-If you want to see the full documentation please visit [https://neurostates.readthedocs.io/en/latest/index.html.](https://neurostates.readthedocs.io/en/latest/).
+If you want to see the full documentation please visit [https://neurostates.readthedocs.io/en/latest/index.html](https://neurostates.readthedocs.io/en/latest/).
 
 # License
 Neurostates is under The 3-Clause BSD License
