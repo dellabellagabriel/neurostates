@@ -4,9 +4,13 @@
 
 from pathlib import Path
 
-from neurostates.core.connectivity import DynamicConnectivity, connectivity
+from neurostates.core.connectivity import (
+    DynamicConnectivity, DynamicConnectivityGroup, connectivity
+)
+
 from neurostates.core.window import (
     SamplesWindower,
+    SamplesWindowerGroup,
     SecondsWindower,
     window,
 )
@@ -90,6 +94,34 @@ def test_dynamic_connectivity_shape():
 
     assert connectivity_output == (20, 27, 90, 90)
 
+def test_dynamic_connectivity_group_shape():
+    np.random.seed(42)
+    n_subjects = 20
+    n_regions = 90
+    n_samples = 150
+    
+    group_of_matrices = {
+        "matrix1": np.random.rand(n_subjects, n_regions, n_samples),
+        "matrix2": np.random.rand(n_subjects, n_regions, n_samples)
+    }
+    
+    length_in_samples = 20
+    step_in_samples = 5
+    sliding_windower = SamplesWindowerGroup(
+        length=length_in_samples,
+        step=step_in_samples,
+        tapering_function=hamming,
+    )
+    sliging_window = sliding_windower.transform(group_of_matrices)
+
+    dynamic_connectivity = DynamicConnectivityGroup()
+    
+    transformed = dynamic_connectivity.transform(sliging_window)
+    
+    for matrix, data in transformed.items():
+        connectivity_output = data.shape
+
+        assert connectivity_output == (20, 27, 90, 90)
 
 def test_dynamic_connectivity_seconds_windower():
     path_to_tests = Path("tests/core")

@@ -2,7 +2,13 @@
 # Copyright (c) 2024, Della Bella, Gabriel; Rodriguez, Natalia
 # All rights reserved.
 
-from neurostates.core.window import SamplesWindower, SecondsWindower, window
+from neurostates.core.window import (
+    SamplesWindower,
+    SamplesWindowerGroup,
+    SecondsWindower,
+    SecondsWindowerGroup,
+    window,
+)
 
 import numpy as np
 
@@ -142,3 +148,68 @@ def test_samples_windower():
     assert subjects == n_subjects
     assert regions == n_regions
     assert samples == length_in_samples
+
+
+def test_samples_windower_group():
+    np.random.seed(42)  # ver como cambiar esto
+    n_subjects = 20
+    n_regions = 90
+    n_samples = 150
+    dict_of_groups = {
+        "group_1": np.random.rand(n_subjects, n_regions, n_samples),
+        "group_2": np.random.rand(n_subjects, n_regions, n_samples),
+    }
+
+    length_in_samples = 20
+    step_in_samples = 5
+    samples_windower_group = SamplesWindowerGroup(
+        length=length_in_samples,
+        step=step_in_samples,
+        tapering_function=hamming,
+    )
+
+    transformed = samples_windower_group.transform(dict_of_groups)
+
+    for group, data in transformed.items():
+        subjects, regions, windows, samples = data.shape
+        n_windows_ref = (
+            int((n_samples - length_in_samples) / step_in_samples) + 1
+        )
+        assert windows == n_windows_ref
+        assert subjects == n_subjects
+        assert regions == n_regions
+        assert samples == length_in_samples
+
+
+def test_seconds_windower_group():
+    np.random.seed(42)  # ver como cambiar esto
+    n_subjects = 20
+    n_regions = 90
+    n_samples = 150
+    sample_rate = 2
+    dict_of_groups = {
+        "group_1": np.random.rand(n_subjects, n_regions, n_samples),
+        "group_2": np.random.rand(n_subjects, n_regions, n_samples),
+    }
+
+    length_in_seconds = 10
+    step_in_seconds = 2.5
+    length_in_samples = int(length_in_seconds * sample_rate)
+    step_in_samples = int(step_in_seconds * sample_rate)
+    seconds_windower_group = SecondsWindowerGroup(
+        length=length_in_seconds,
+        step=step_in_seconds,
+        tapering_function=hamming,
+        sample_rate=sample_rate,
+    )
+    transformed = seconds_windower_group.transform(dict_of_groups)
+
+    for group, data in transformed.items():
+        subjects, regions, windows, samples = data.shape
+        n_windows_ref = (
+            int((n_samples - length_in_samples) / step_in_samples) + 1
+        )
+        assert windows == n_windows_ref
+        assert subjects == n_subjects
+        assert regions == n_regions
+        assert samples == length_in_samples
