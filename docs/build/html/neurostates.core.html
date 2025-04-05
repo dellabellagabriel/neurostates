@@ -186,7 +186,7 @@ calculates the frequency of each label.</p>
 <section id="id12">
 <h3>Parameters<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
 <blockquote>
-<div><p><a href="#id33"><span class="problematic" id="id34">cluster_centers_</span></a> (np.ndarray): A k x N matrix
+<div><p><a href="#id60"><span class="problematic" id="id61">cluster_centers_</span></a> (np.ndarray): A k x N matrix
 with k the number of centroids and N the features.</p>
 </div></blockquote>
 </section>
@@ -259,12 +259,154 @@ and their entropies.</p>
 </section>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="neurostates.core.connectivity.DynamicConnectivityGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neurostates.core.connectivity.</span></span><span class="sig-name descname"><span class="pre">DynamicConnectivityGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pearson'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.connectivity.DynamicConnectivityGroup" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TransformerMixin</span></code></p>
+<p>Calculate the dynamic connectivity windows based on the    windowed neuroimage timeseries.</p>
+<section id="id19">
+<h3>Parameters<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>method<span class="classifier">str or callable</span></dt><dd><p>The measure that will be used to compute the connectivity between        regions. Options are: pearson, cosine_similarity, spearmanr.        It also allows a function to be passed. This function should        take a regions x time matrix and return regions x regions.        Default is pearson, which means the method will be the        Pearson correlation (np.corrcoef).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.connectivity.DynamicConnectivityGroup.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.connectivity.DynamicConnectivityGroup.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Required by the scikit-learn        interface.        No parameters are fit in this transformer.</p>
+<section id="id20">
+<h4>Parameters<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>X<span class="classifier">array-like, shape (n_samples, n_features)</span></dt><dd><p>Input data to fit the transformer.</p>
+</dd>
+<dt>y<span class="classifier">array-like, shape (n_samples,), default=None</span></dt><dd><p>Target labels (not used in this case).</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h4>Returns<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The fitted transformer (no changes in this case).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.connectivity.DynamicConnectivityGroup.set_fit_request">
+<span class="sig-name descname"><span class="pre">set_fit_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'$UNCHANGED$'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#neurostates.core.connectivity.DynamicConnectivityGroup" title="neurostates.core.connectivity.DynamicConnectivityGroup"><span class="pre">DynamicConnectivityGroup</span></a></span></span><a class="headerlink" href="#neurostates.core.connectivity.DynamicConnectivityGroup.set_fit_request" title="Link to this definition">¶</a></dt>
+<dd><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p>
+<p>Note that this method is only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_metadata_routing=True</span></code> (see <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.set_config()</span></code>).
+Please see <span class="xref std std-ref">User Guide</span> on how the routing
+mechanism works.</p>
+<p>The options for each parameter are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: metadata is requested, and passed to <code class="docutils literal notranslate"><span class="pre">fit</span></code> if provided. The request is ignored if metadata is not provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: metadata is not requested and the meta-estimator will not pass it to <code class="docutils literal notranslate"><span class="pre">fit</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: metadata is not requested, and the meta-estimator will raise an error if the user provides it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: metadata should be passed to the meta-estimator with this given alias instead of the original name.</p></li>
+</ul>
+<p>The default (<code class="docutils literal notranslate"><span class="pre">sklearn.utils.metadata_routing.UNCHANGED</span></code>) retains the
+existing request. This allows you to change the request for some
+parameters and not others.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is only relevant if this estimator is used as a
+sub-estimator of a meta-estimator, e.g. used inside a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>. Otherwise it has no effect.</p>
+</div>
+<section id="id22">
+<h4>Parameters<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>dict_of_groups<span class="classifier">str, True, False, or None,                     default=sklearn.utils.metadata_routing.UNCHANGED</span></dt><dd><p>Metadata routing for <code class="docutils literal notranslate"><span class="pre">dict_of_groups</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">fit</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="id23">
+<h4>Returns<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The updated object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.connectivity.DynamicConnectivityGroup.set_transform_request">
+<span class="sig-name descname"><span class="pre">set_transform_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'$UNCHANGED$'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#neurostates.core.connectivity.DynamicConnectivityGroup" title="neurostates.core.connectivity.DynamicConnectivityGroup"><span class="pre">DynamicConnectivityGroup</span></a></span></span><a class="headerlink" href="#neurostates.core.connectivity.DynamicConnectivityGroup.set_transform_request" title="Link to this definition">¶</a></dt>
+<dd><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p>
+<p>Note that this method is only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_metadata_routing=True</span></code> (see <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.set_config()</span></code>).
+Please see <span class="xref std std-ref">User Guide</span> on how the routing
+mechanism works.</p>
+<p>The options for each parameter are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: metadata is requested, and passed to <code class="docutils literal notranslate"><span class="pre">transform</span></code> if provided. The request is ignored if metadata is not provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: metadata is not requested and the meta-estimator will not pass it to <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: metadata is not requested, and the meta-estimator will raise an error if the user provides it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: metadata should be passed to the meta-estimator with this given alias instead of the original name.</p></li>
+</ul>
+<p>The default (<code class="docutils literal notranslate"><span class="pre">sklearn.utils.metadata_routing.UNCHANGED</span></code>) retains the
+existing request. This allows you to change the request for some
+parameters and not others.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is only relevant if this estimator is used as a
+sub-estimator of a meta-estimator, e.g. used inside a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>. Otherwise it has no effect.</p>
+</div>
+<section id="id24">
+<h4>Parameters<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>dict_of_groups<span class="classifier">str, True, False, or None,                     default=sklearn.utils.metadata_routing.UNCHANGED</span></dt><dd><p>Metadata routing for <code class="docutils literal notranslate"><span class="pre">dict_of_groups</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="id25">
+<h4>Returns<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The updated object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.connectivity.DynamicConnectivityGroup.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.connectivity.DynamicConnectivityGroup.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Transforms a windowed timeseries into dynamic connectivity        matrices.</p>
+<section id="id26">
+<h4>Parameters<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>X<span class="classifier">ndarray</span></dt><dd><p>A numpy array of size n_subjects x n_windows x n_rois x n_samples</p>
+</dd>
+</dl>
+</section>
+<section id="id27">
+<h4>Returns<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>connectivity: ndarray</dt><dd><p>A numpy array of size n_subjects x n_windows x n_rois x n_rois</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="neurostates.core.connectivity.connectivity">
 <span class="sig-prename descclassname"><span class="pre">neurostates.core.connectivity.</span></span><span class="sig-name descname"><span class="pre">connectivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">windowed_data_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pearson'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.connectivity.connectivity" title="Link to this definition">¶</a></dt>
 <dd><p>Represents the functional connectivity operation.    This usually comes from the output of window function.</p>
-<section id="id19">
-<h3>Parameters<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<section id="id28">
+<h3>Parameters<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt>windowed_data: numpy array</dt><dd><p>The output of window function.
 The shape should be subjets x regions x window x samples.</p>
@@ -273,8 +415,8 @@ The shape should be subjets x regions x window x samples.</p>
 </dd>
 </dl>
 </section>
-<section id="id20">
-<h3>Returns<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<section id="id29">
+<h3>Returns<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h3>
 <p>connectivity_data: ndarray
 An array of size subjects x windows x regions x regions that holds the    connectivity values.</p>
 </section>
@@ -311,8 +453,8 @@ An array of size subjects x windows x regions x regions that holds the    connec
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neurostates.core.window.</span></span><span class="sig-name descname"><span class="pre">SamplesWindower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapering_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SamplesWindower" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TransformerMixin</span></code></p>
 <p>Perform the sliding window operation from the data’s timeseries    using samples as the unit.</p>
-<section id="id21">
-<h3>Parameters<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<section id="id30">
+<h3>Parameters<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt>length<span class="classifier">float</span></dt><dd><p>The length of the window in samples.</p>
 </dd>
@@ -325,8 +467,8 @@ An array of size subjects x windows x regions x regions that holds the    connec
 <dt class="sig sig-object py" id="neurostates.core.window.SamplesWindower.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SamplesWindower.fit" title="Link to this definition">¶</a></dt>
 <dd><p>Required by the scikit-learn        interface.        No parameters are fit in this transformer.</p>
-<section id="id22">
-<h4>Parameters<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
+<section id="id31">
+<h4>Parameters<a class="headerlink" href="#id31" title="Link to this heading">¶</a></h4>
 <dl class="simple">
 <dt>X<span class="classifier">array-like, shape (n_samples, n_features)</span></dt><dd><p>Input data to fit the transformer.</p>
 </dd>
@@ -334,8 +476,8 @@ An array of size subjects x windows x regions x regions that holds the    connec
 </dd>
 </dl>
 </section>
-<section id="id23">
-<h4>Returns<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h4>
+<section id="id32">
+<h4>Returns<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h4>
 <dl class="simple">
 <dt>self<span class="classifier">object</span></dt><dd><p>The fitted transformer (no changes in this case).</p>
 </dd>
@@ -347,15 +489,161 @@ An array of size subjects x windows x regions x regions that holds the    connec
 <dt class="sig sig-object py" id="neurostates.core.window.SamplesWindower.transform">
 <span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SamplesWindower.transform" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms a numpy array of size n_subjects x n_rois x n_samples        representing the timeseries to a sliding window timeseries of        size n_subjects x n_windows x n_rois x n_samples.</p>
-<section id="id24">
-<h4>Parameters<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h4>
+<section id="id33">
+<h4>Parameters<a class="headerlink" href="#id33" title="Link to this heading">¶</a></h4>
 <dl class="simple">
 <dt>X<span class="classifier">ndarray</span></dt><dd><p>A numpy array representing the timeseries</p>
 </dd>
 </dl>
 </section>
-<section id="id25">
-<h4>Returns<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
+<section id="id34">
+<h4>Returns<a class="headerlink" href="#id34" title="Link to this heading">¶</a></h4>
+<blockquote>
+<div><p>window: ndarray
+A dictionary of sliding window timeseries</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="neurostates.core.window.SamplesWindowerGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neurostates.core.window.</span></span><span class="sig-name descname"><span class="pre">SamplesWindowerGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapering_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SamplesWindowerGroup" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TransformerMixin</span></code></p>
+<p>Perform the sliding window operation from the data’s timeseries    using samples as the unit.</p>
+<section id="id35">
+<h3>Parameters<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>length<span class="classifier">float</span></dt><dd><p>The length of the window in samples.</p>
+</dd>
+<dt>step<span class="classifier">float</span></dt><dd><p>The step of the window in samples.</p>
+</dd>
+<dt>tapering_function: callable, default=None</dt><dd><p>The tapering function to use for each window.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SamplesWindowerGroup.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SamplesWindowerGroup.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Required by the scikit-learn        interface.        No parameters are fit in this transformer.</p>
+<section id="id36">
+<h4>Parameters<a class="headerlink" href="#id36" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>X<span class="classifier">array-like, shape (n_samples, n_features)</span></dt><dd><p>Input data to fit the transformer.</p>
+</dd>
+<dt>y<span class="classifier">array-like, shape (n_samples,), default=None</span></dt><dd><p>Target labels (not used in this case).</p>
+</dd>
+</dl>
+</section>
+<section id="id37">
+<h4>Returns<a class="headerlink" href="#id37" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The fitted transformer (no changes in this case).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SamplesWindowerGroup.set_fit_request">
+<span class="sig-name descname"><span class="pre">set_fit_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'$UNCHANGED$'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#neurostates.core.window.SamplesWindowerGroup" title="neurostates.core.window.SamplesWindowerGroup"><span class="pre">SamplesWindowerGroup</span></a></span></span><a class="headerlink" href="#neurostates.core.window.SamplesWindowerGroup.set_fit_request" title="Link to this definition">¶</a></dt>
+<dd><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p>
+<p>Note that this method is only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_metadata_routing=True</span></code> (see <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.set_config()</span></code>).
+Please see <span class="xref std std-ref">User Guide</span> on how the routing
+mechanism works.</p>
+<p>The options for each parameter are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: metadata is requested, and passed to <code class="docutils literal notranslate"><span class="pre">fit</span></code> if provided. The request is ignored if metadata is not provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: metadata is not requested and the meta-estimator will not pass it to <code class="docutils literal notranslate"><span class="pre">fit</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: metadata is not requested, and the meta-estimator will raise an error if the user provides it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: metadata should be passed to the meta-estimator with this given alias instead of the original name.</p></li>
+</ul>
+<p>The default (<code class="docutils literal notranslate"><span class="pre">sklearn.utils.metadata_routing.UNCHANGED</span></code>) retains the
+existing request. This allows you to change the request for some
+parameters and not others.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is only relevant if this estimator is used as a
+sub-estimator of a meta-estimator, e.g. used inside a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>. Otherwise it has no effect.</p>
+</div>
+<section id="id38">
+<h4>Parameters<a class="headerlink" href="#id38" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>dict_of_groups<span class="classifier">str, True, False, or None,                     default=sklearn.utils.metadata_routing.UNCHANGED</span></dt><dd><p>Metadata routing for <code class="docutils literal notranslate"><span class="pre">dict_of_groups</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">fit</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="id39">
+<h4>Returns<a class="headerlink" href="#id39" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The updated object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SamplesWindowerGroup.set_transform_request">
+<span class="sig-name descname"><span class="pre">set_transform_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'$UNCHANGED$'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#neurostates.core.window.SamplesWindowerGroup" title="neurostates.core.window.SamplesWindowerGroup"><span class="pre">SamplesWindowerGroup</span></a></span></span><a class="headerlink" href="#neurostates.core.window.SamplesWindowerGroup.set_transform_request" title="Link to this definition">¶</a></dt>
+<dd><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p>
+<p>Note that this method is only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_metadata_routing=True</span></code> (see <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.set_config()</span></code>).
+Please see <span class="xref std std-ref">User Guide</span> on how the routing
+mechanism works.</p>
+<p>The options for each parameter are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: metadata is requested, and passed to <code class="docutils literal notranslate"><span class="pre">transform</span></code> if provided. The request is ignored if metadata is not provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: metadata is not requested and the meta-estimator will not pass it to <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: metadata is not requested, and the meta-estimator will raise an error if the user provides it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: metadata should be passed to the meta-estimator with this given alias instead of the original name.</p></li>
+</ul>
+<p>The default (<code class="docutils literal notranslate"><span class="pre">sklearn.utils.metadata_routing.UNCHANGED</span></code>) retains the
+existing request. This allows you to change the request for some
+parameters and not others.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is only relevant if this estimator is used as a
+sub-estimator of a meta-estimator, e.g. used inside a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>. Otherwise it has no effect.</p>
+</div>
+<section id="id40">
+<h4>Parameters<a class="headerlink" href="#id40" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>dict_of_groups<span class="classifier">str, True, False, or None,                     default=sklearn.utils.metadata_routing.UNCHANGED</span></dt><dd><p>Metadata routing for <code class="docutils literal notranslate"><span class="pre">dict_of_groups</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="id41">
+<h4>Returns<a class="headerlink" href="#id41" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The updated object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SamplesWindowerGroup.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SamplesWindowerGroup.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Transforms a numpy array of size n_subjects x n_rois x n_samples        representing the timeseries to a sliding window timeseries of        size n_subjects x n_windows x n_rois x n_samples.</p>
+<section id="id42">
+<h4>Parameters<a class="headerlink" href="#id42" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>X<span class="classifier">ndarray</span></dt><dd><p>A numpy array representing the timeseries</p>
+</dd>
+</dl>
+</section>
+<section id="id43">
+<h4>Returns<a class="headerlink" href="#id43" title="Link to this heading">¶</a></h4>
 <blockquote>
 <div><p>window: ndarray
 A dictionary of sliding window timeseries</p>
@@ -371,8 +659,8 @@ A dictionary of sliding window timeseries</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neurostates.core.window.</span></span><span class="sig-name descname"><span class="pre">SecondsWindower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapering_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SecondsWindower" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TransformerMixin</span></code></p>
 <p>Perform the sliding window operation from the data’s timeseries    using seconds as the unit.</p>
-<section id="id26">
-<h3>Parameters<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h3>
+<section id="id44">
+<h3>Parameters<a class="headerlink" href="#id44" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt>length<span class="classifier">float</span></dt><dd><p>The length of the window in seconds.</p>
 </dd>
@@ -387,8 +675,8 @@ A dictionary of sliding window timeseries</p>
 <dt class="sig sig-object py" id="neurostates.core.window.SecondsWindower.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SecondsWindower.fit" title="Link to this definition">¶</a></dt>
 <dd><p>Required by the scikit-learn        interface.        No parameters are fit in this transformer.</p>
-<section id="id27">
-<h4>Parameters<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h4>
+<section id="id45">
+<h4>Parameters<a class="headerlink" href="#id45" title="Link to this heading">¶</a></h4>
 <dl class="simple">
 <dt>X<span class="classifier">array-like, shape (n_samples, n_features)</span></dt><dd><p>Input data to fit the transformer.</p>
 </dd>
@@ -396,8 +684,8 @@ A dictionary of sliding window timeseries</p>
 </dd>
 </dl>
 </section>
-<section id="id28">
-<h4>Returns<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h4>
+<section id="id46">
+<h4>Returns<a class="headerlink" href="#id46" title="Link to this heading">¶</a></h4>
 <dl class="simple">
 <dt>self<span class="classifier">object</span></dt><dd><p>The fitted transformer (no changes in this case).</p>
 </dd>
@@ -409,18 +697,167 @@ A dictionary of sliding window timeseries</p>
 <dt class="sig sig-object py" id="neurostates.core.window.SecondsWindower.transform">
 <span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SecondsWindower.transform" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms a numpy array of size n_subjects x n_rois x n_samples        representing the timeseries to a sliding window timeseries of        size n_subjects x n_windows x n_rois x n_samples.</p>
-<section id="id29">
-<h4>Parameters<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h4>
+<section id="id47">
+<h4>Parameters<a class="headerlink" href="#id47" title="Link to this heading">¶</a></h4>
 <dl class="simple">
 <dt>X<span class="classifier">ndarray</span></dt><dd><p>A numpy array representing the timeseries</p>
 </dd>
 </dl>
 </section>
-<section id="id30">
-<h4>Returns<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h4>
+<section id="id48">
+<h4>Returns<a class="headerlink" href="#id48" title="Link to this heading">¶</a></h4>
 <blockquote>
 <div><p>window: ndarray
-A dictionary of sliding window timeseries</p>
+A sliding window timeseries</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="neurostates.core.window.SecondsWindowerGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neurostates.core.window.</span></span><span class="sig-name descname"><span class="pre">SecondsWindowerGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapering_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SecondsWindowerGroup" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TransformerMixin</span></code></p>
+<p>Perform the sliding window operation from the data’s timeseries    using seconds as the unit on a group basis.</p>
+<section id="id49">
+<h3>Parameters<a class="headerlink" href="#id49" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>length<span class="classifier">float</span></dt><dd><p>The length of the window in seconds.</p>
+</dd>
+<dt>step<span class="classifier">float</span></dt><dd><p>The step of the window in seconds.</p>
+</dd>
+<dt>sample_rate<span class="classifier">float</span></dt><dd><p>The sample rate of the timeseries in Hz.</p>
+</dd>
+<dt>tapering_function: callable, default=None</dt><dd><p>The tapering function to use for each window.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SecondsWindowerGroup.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SecondsWindowerGroup.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Required by the scikit-learn        interface.        No parameters are fit in this transformer.</p>
+<section id="id50">
+<h4>Parameters<a class="headerlink" href="#id50" title="Link to this heading">¶</a></h4>
+<p>dict_of_groups : dictionary of groups. Each key (group)
+must be an ndarray of size n_subjects x n_rois x n_samples
+y : array-like, shape (n_samples,), default=None</p>
+<blockquote>
+<div><p>Target labels (not used in this case).</p>
+</div></blockquote>
+</section>
+<section id="id51">
+<h4>Returns<a class="headerlink" href="#id51" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The fitted transformer (no changes in this case).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SecondsWindowerGroup.set_fit_request">
+<span class="sig-name descname"><span class="pre">set_fit_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'$UNCHANGED$'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#neurostates.core.window.SecondsWindowerGroup" title="neurostates.core.window.SecondsWindowerGroup"><span class="pre">SecondsWindowerGroup</span></a></span></span><a class="headerlink" href="#neurostates.core.window.SecondsWindowerGroup.set_fit_request" title="Link to this definition">¶</a></dt>
+<dd><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p>
+<p>Note that this method is only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_metadata_routing=True</span></code> (see <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.set_config()</span></code>).
+Please see <span class="xref std std-ref">User Guide</span> on how the routing
+mechanism works.</p>
+<p>The options for each parameter are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: metadata is requested, and passed to <code class="docutils literal notranslate"><span class="pre">fit</span></code> if provided. The request is ignored if metadata is not provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: metadata is not requested and the meta-estimator will not pass it to <code class="docutils literal notranslate"><span class="pre">fit</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: metadata is not requested, and the meta-estimator will raise an error if the user provides it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: metadata should be passed to the meta-estimator with this given alias instead of the original name.</p></li>
+</ul>
+<p>The default (<code class="docutils literal notranslate"><span class="pre">sklearn.utils.metadata_routing.UNCHANGED</span></code>) retains the
+existing request. This allows you to change the request for some
+parameters and not others.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is only relevant if this estimator is used as a
+sub-estimator of a meta-estimator, e.g. used inside a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>. Otherwise it has no effect.</p>
+</div>
+<section id="id52">
+<h4>Parameters<a class="headerlink" href="#id52" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>dict_of_groups<span class="classifier">str, True, False, or None,                     default=sklearn.utils.metadata_routing.UNCHANGED</span></dt><dd><p>Metadata routing for <code class="docutils literal notranslate"><span class="pre">dict_of_groups</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">fit</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="id53">
+<h4>Returns<a class="headerlink" href="#id53" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The updated object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SecondsWindowerGroup.set_transform_request">
+<span class="sig-name descname"><span class="pre">set_transform_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'$UNCHANGED$'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#neurostates.core.window.SecondsWindowerGroup" title="neurostates.core.window.SecondsWindowerGroup"><span class="pre">SecondsWindowerGroup</span></a></span></span><a class="headerlink" href="#neurostates.core.window.SecondsWindowerGroup.set_transform_request" title="Link to this definition">¶</a></dt>
+<dd><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p>
+<p>Note that this method is only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_metadata_routing=True</span></code> (see <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.set_config()</span></code>).
+Please see <span class="xref std std-ref">User Guide</span> on how the routing
+mechanism works.</p>
+<p>The options for each parameter are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: metadata is requested, and passed to <code class="docutils literal notranslate"><span class="pre">transform</span></code> if provided. The request is ignored if metadata is not provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: metadata is not requested and the meta-estimator will not pass it to <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: metadata is not requested, and the meta-estimator will raise an error if the user provides it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code>: metadata should be passed to the meta-estimator with this given alias instead of the original name.</p></li>
+</ul>
+<p>The default (<code class="docutils literal notranslate"><span class="pre">sklearn.utils.metadata_routing.UNCHANGED</span></code>) retains the
+existing request. This allows you to change the request for some
+parameters and not others.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3.</span></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is only relevant if this estimator is used as a
+sub-estimator of a meta-estimator, e.g. used inside a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>. Otherwise it has no effect.</p>
+</div>
+<section id="id54">
+<h4>Parameters<a class="headerlink" href="#id54" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>dict_of_groups<span class="classifier">str, True, False, or None,                     default=sklearn.utils.metadata_routing.UNCHANGED</span></dt><dd><p>Metadata routing for <code class="docutils literal notranslate"><span class="pre">dict_of_groups</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="id55">
+<h4>Returns<a class="headerlink" href="#id55" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>self<span class="classifier">object</span></dt><dd><p>The updated object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neurostates.core.window.SecondsWindowerGroup.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_of_groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.SecondsWindowerGroup.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Transforms a numpy array of size n_subjects x n_rois x n_samples        representing the timeseries to a sliding window timeseries of        size n_subjects x n_windows x n_rois x n_samples on a group basis.</p>
+<section id="id56">
+<h4>Parameters<a class="headerlink" href="#id56" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>dict_of_groups<span class="classifier">ndarray</span></dt><dd><p>A dictionary of groups. Each key (group)
+must be a numpy array representing the timeseries</p>
+</dd>
+</dl>
+</section>
+<section id="id57">
+<h4>Returns<a class="headerlink" href="#id57" title="Link to this heading">¶</a></h4>
+<blockquote>
+<div><p>window: ndarray
+A dictionary sliding window timeseries</p>
 </div></blockquote>
 </section>
 </dd></dl>
@@ -432,8 +869,8 @@ A dictionary of sliding window timeseries</p>
 <dt class="sig sig-object py" id="neurostates.core.window.window">
 <span class="sig-prename descclassname"><span class="pre">neurostates.core.window.</span></span><span class="sig-name descname"><span class="pre">window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_array_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tapering_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neurostates.core.window.window" title="Link to this definition">¶</a></dt>
 <dd><p>Represents a sliding window operation.</p>
-<section id="id31">
-<h3>Parameters<a class="headerlink" href="#id31" title="Link to this heading">¶</a></h3>
+<section id="id58">
+<h3>Parameters<a class="headerlink" href="#id58" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt>data_array: numpy array</dt><dd><p>The neuroimage data.
 The shape should be subjects x regions x samples</p>
@@ -446,8 +883,8 @@ The shape should be subjects x regions x samples</p>
 </dd>
 </dl>
 </section>
-<section id="id32">
-<h3>Returns<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h3>
+<section id="id59">
+<h3>Returns<a class="headerlink" href="#id59" title="Link to this heading">¶</a></h3>
 <p>windowed_data: ndarray
 An array of size subjects x regions x windows x samples that    holds the data after the sliding window procedure.</p>
 </section>

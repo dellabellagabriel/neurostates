@@ -30,15 +30,4 @@ Getting Started
 To get started with **Neurostates**, follow the :doc:`installation guide <installation>`, and you can start using the modules straight away.
 The documentation will guide you through the setup and provide examples on how to use the most common features.
 
-Documentation Overview
-----------------------
-
-This documentation is organized as follows:
-
-- **Installation**: How to install **Neurostates**.
-- **Usage**: Examples and instructions on how to use the core features.
-- **Modules**: A comprehensive list and description of the available modules.
-
----
-
 If you have any questions, feel free to check out our Github issues or write us an email to: dellabellagabriel@gmail.com or natirodriguez114@gmail.com

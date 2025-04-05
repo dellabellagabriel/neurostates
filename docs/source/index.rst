@@ -7,8 +7,7 @@ Neurostates documentation
 =========================
 
 .. image:: _static/logo.png
-    :align: center
-    :scale: 100 %
+    :scale: 50 %
 
 **Neurostates** is a Python package for detecting recurrent functional connectivity patterns (also known as brain states) and estimating their occurrence probabilities in EEG and fMRI.
 
