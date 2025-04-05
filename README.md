@@ -119,6 +119,8 @@ ax[2].set_title("state 3")
 plt.show()
 ```
 
+<img src="res/states.png" alt="logo" width="50%">
+
 You can also access intermediate results from the pipeline, such as the windowed timeseries or the connectivity matrices:
 
 ```python
@@ -180,6 +182,7 @@ ax[2].set_title("state 3")
 plt.show()
 ```
 
+<img src="res/frequencies.png" alt="logo" width="50%">
 
 # Documentation
 
