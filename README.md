@@ -2,7 +2,9 @@
 
 <img src="res/logo_final.png" alt="logo" width="20%">
 
-[![https://github.com/leliel12/diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
+[![Gihub Actions CI](https://github.com/dellabellagabriel/neurostates/actions/workflows/CI.yml/badge.svg)](https://github.com/dellabellagabriel/neurostates/actions/workflows/CI.yml)
+[![Documentation Status](https://readthedocs.org/projects/neurostates/badge/?version=latest&style=flat)](https://neurostates.readthedocs.io/en/latest/)
+[![License](https://img.shields.io/pypi/l/uttrs?color=blue)](https://www.tldrlegal.com/l/bsd3)
 
 **NeuroStates** is a Python package for detecting recurrent functional connectivity patterns (also known as brain states) and estimating their ocurrence probabilities in EEG and fMRI.
 
@@ -185,6 +187,7 @@ plt.show()
 <img src="res/frequencies.png" alt="logo" width="50%">
 
 # Documentation
+If you want to see the full documentation please visit [https://neurostates.readthedocs.io/en/latest/index.html](https://neurostates.readthedocs.io/en/latest/).
 
 # License
 Neurostates is under The 3-Clause BSD License
