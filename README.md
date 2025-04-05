@@ -1,6 +1,6 @@
 # NeuroStates
 
-<img src="res/logo_final.png" alt="logo" width="20%">
+<img src="https://raw.githubusercontent.com/dellabellagabriel/neurostates/main/res/logo_final.png" alt="logo" width="20%">
 
 [![Gihub Actions CI](https://github.com/dellabellagabriel/neurostates/actions/workflows/CI.yml/badge.svg)](https://github.com/dellabellagabriel/neurostates/actions/workflows/CI.yml)
 [![Documentation Status](https://readthedocs.org/projects/neurostates/badge/?version=latest&style=flat)](https://neurostates.readthedocs.io/en/latest/)
@@ -121,7 +121,7 @@ ax[2].set_title("state 3")
 plt.show()
 ```
 
-<img src="res/states.png" alt="logo" width="50%">
+<img src="https://github.com/dellabellagabriel/neurostates/raw/main/res/states.png" alt="logo" width="50%">
 
 You can also access intermediate results from the pipeline, such as the windowed timeseries or the connectivity matrices:
 
@@ -184,7 +184,7 @@ ax[2].set_title("state 3")
 plt.show()
 ```
 
-<img src="res/frequencies.png" alt="logo" width="50%">
+<img src="https://github.com/dellabellagabriel/neurostates/raw/main/res/frequencies.png" alt="logo" width="50%">
 
 # Documentation
 If you want to see the full documentation please visit [https://neurostates.readthedocs.io/en/latest/index.html](https://neurostates.readthedocs.io/en/latest/).
