@@ -24,6 +24,11 @@ pip install -e .
 ```
 
 # Basic Usage
+
+In neuroscience research, a common setup involves comparing two or more groups — for example, healthy controls and patients — to uncover differences in brain dynamics. One powerful approach to characterize these dynamics is to extract brain states from functional connectivity patterns over time.
+
+This page will walk you through the necessary steps to implement a brain states analysis with this library.
+
 ## Load data
 
 We load two groups of subjects — controls and patients — where each subject's data is a time series of brain activity (e.g., from fMRI or EEG).  
