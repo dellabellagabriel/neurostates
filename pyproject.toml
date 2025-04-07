@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neurostates"
-version = "0.1.0"
+version = "0.1.2"
 authors = [{ name = "Gabriel Della Bella", email = "dellabellagabriel@gmail.com" }, { name = "Natalia Rodriguez", email = "natirodriguez114@gmail.com" }]
 readme = "README.md"
 license = {file = "LICENSE.txt"}
