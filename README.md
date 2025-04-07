@@ -4,6 +4,8 @@
 
 [![Gihub Actions CI](https://github.com/dellabellagabriel/neurostates/actions/workflows/CI.yml/badge.svg)](https://github.com/dellabellagabriel/neurostates/actions/workflows/CI.yml)
 [![Documentation Status](https://readthedocs.org/projects/neurostates/badge/?version=latest&style=flat)](https://neurostates.readthedocs.io/en/latest/)
+[![PyPI](https://img.shields.io/pypi/v/neurostates)](https://pypi.org/project/neurostates/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://pypi.org/project/neurostates/)
 [![License](https://img.shields.io/pypi/l/uttrs?color=blue)](https://www.tldrlegal.com/l/bsd3)
 
 **NeuroStates** is a Python package for detecting recurrent functional connectivity patterns (also known as brain states) and estimating their ocurrence probabilities in EEG and fMRI.
