@@ -168,20 +168,20 @@ Finally, you can plot the frequency of each brain state in the data:
 
     fig, ax = plt.subplots(1, 3, figsize=(8,4))
     ax[0].boxplot(
-        [freqs["controls"][0], freqs["patients"][0]],
+        [freqs["controls"][:,0], freqs["patients"][:,0]],
         tick_labels=["controls", "patients"]
     )
     ax[0].set_ylabel("frequency")
     ax[0].set_title("state 1")
 
     ax[1].boxplot(
-        [freqs["controls"][1], freqs["patients"][1]],
+        [freqs["controls"][:,1], freqs["patients"][:,1]],
         tick_labels=["controls", "patients"]
     )
     ax[1].set_title("state 2")
     
     ax[2].boxplot(
-        [freqs["controls"][2], freqs["patients"][2]],
+        [freqs["controls"][:,2], freqs["patients"][:,2]],
         tick_labels=["controls", "patients"]
     )
     ax[2].set_title("state 3")
